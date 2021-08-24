@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Shop.Controllers
 {
-    public class ProductController
+    public class ProductsController
     {
     }
 }

@@ -12,6 +12,8 @@ using Services.Impementation;
 using Services.Interfaces;
 using Services.Mapping;
 using Shop.Mapping;
+using Shop.Services;
+using Shop.Services.Interfaces;
 
 namespace Shop
 {
@@ -51,7 +53,10 @@ namespace Shop
 
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped<IServiceManager, ServiceManager>();
-
+            
+            services.AddTransient<IWebCategoriesService, WebCategoriesService>();
+            services.AddTransient<IWebProductsService, WebProductsService>();
+            
             #endregion
 
             #region Database configuration
