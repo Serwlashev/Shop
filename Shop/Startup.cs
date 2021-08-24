@@ -1,12 +1,16 @@
+using AutoMapper;
+using Database.Implementation;
+using Domain.Repository;
+using Infrastructure.Database;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using Services.Impementation;
+using Services.Interfaces;
+using Services.Mapping;
 
 namespace Shop
 {
@@ -23,6 +27,22 @@ namespace Shop
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+
+            var mappingConfig = new MapperConfiguration(mc =>
+            {
+                mc.AddProfile(new ModelMappingProfile());
+            });
+
+            services.AddSingleton(mappingConfig.CreateMapper());
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
+            services.AddScoped<IServiceManager, ServiceManager>();
+
+            string connectionString = Configuration.GetConnectionString("DefaultConnection");
+
+            services.AddDbContextPool<ApplicationDbContext>(options =>
+            {
+                options.UseSqlServer(connectionString);
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
