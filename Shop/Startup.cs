@@ -11,6 +11,7 @@ using Microsoft.Extensions.Hosting;
 using Services.Impementation;
 using Services.Interfaces;
 using Services.Mapping;
+using Shop.Mapping;
 
 namespace Shop
 {
@@ -28,14 +29,32 @@ namespace Shop
         {
             services.AddControllersWithViews();
 
+            #region Mapping configuration
+
             var mappingConfig = new MapperConfiguration(mc =>
             {
                 mc.AddProfile(new ModelMappingProfile());
             });
 
             services.AddSingleton(mappingConfig.CreateMapper());
+
+            var webMappingConfig = new MapperConfiguration(mc =>
+            {
+                mc.AddProfile(new MappingProfile());
+            });
+
+            services.AddSingleton(webMappingConfig);
+
+            #endregion
+
+            #region Services configuration
+
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped<IServiceManager, ServiceManager>();
+
+            #endregion
+
+            #region Database configuration
 
             string connectionString = Configuration.GetConnectionString("DefaultConnection");
 
@@ -43,6 +62,8 @@ namespace Shop
             {
                 options.UseSqlServer(connectionString);
             });
+
+            #endregion
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
