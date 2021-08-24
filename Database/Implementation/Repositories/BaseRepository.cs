@@ -19,17 +19,19 @@ namespace Database.Implementation.Repositories
         {
             _context = context;
         }
+
         public async Task<IEnumerable<TValue>> GetAll()
             => await Table.ToListAsync();
 
         public async Task<TValue> Get(TKey id)
             => await Table.FindAsync(id);
 
-        public abstract Task Create(TValue entity);
+        public void Create(TValue entity)
+            => Table.Add(entity);
 
-        public async Task Remove(TKey id)
+        public async void Remove(TKey id)
             => Table.Remove(await Get(id));
 
-        public abstract Task Update(TValue entity);
+        public abstract void Update(TValue entity);
     }
 }

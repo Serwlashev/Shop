@@ -10,8 +10,8 @@ namespace Domain.Repository
     {
         Task<IEnumerable<TValue>> GetAll();
         Task<TValue> Get(TKey id);
-        Task Create(TValue entity);
-        Task Remove(TKey id);
-        Task Update(TValue entity);
+        void Create(TValue entity);
+        void Remove(TKey id);
+        void Update(TValue entity);
     }
 }

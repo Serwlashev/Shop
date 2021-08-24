@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using Services.DTO;
 
 namespace Services.Interfaces
 {
-    class IProductService
+    public interface IProductService : IBaseService<long, ProductDTO>
     {
     }
 }
