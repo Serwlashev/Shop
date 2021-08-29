@@ -1,6 +1,6 @@
-﻿using Services.DTO;
+﻿using Services.Abstract.DTO;
 
-namespace Services.Interfaces
+namespace Services.Abstract.Interfaces
 {
     public interface IProductService : IBaseService<long, ProductDTO>
     {

@@ -1,8 +1,15 @@
 ﻿using Shop.Models;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Shop.Services.Interfaces
 {
-    public interface IWebProductsService : IWebService<long, ProductViewModel>
+    public interface IWebProductsService
     {
+        Task<IEnumerable<ProductModel>> GetAllAsync();
+        Task<ProductModel> GetAsync(long id);
+        Task<bool> UpdateAsync(ProductModel entity);
+        Task<bool> CreateAsync(ProductModel entity);
+        Task<bool> RemoveAsync(long id);
     }
 }

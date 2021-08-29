@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
-using Services.DTO;
-using Services.Interfaces;
+using Services.Abstract.DTO;
+using Services.Abstract.Interfaces;
 using Shop.Models;
 using Shop.Services.Interfaces;
 using System.Collections.Generic;
@@ -19,19 +19,19 @@ namespace Shop.Services
             _mapper = mapper;
         }
 
-        public void Create(ProductViewModel entity)
-            => _serviceManager.ProductService.Create(_mapper.Map<ProductDTO>(entity));
+        public async Task<bool> CreateAsync(ProductModel entity)
+            => await _serviceManager.ProductService.CreateAsync(_mapper.Map<ProductDTO>(entity));
 
-        public async Task<ProductViewModel> Get(long id)
-            => _mapper.Map<ProductViewModel>(await _serviceManager.ProductService.Get(id));
+        public async Task<ProductModel> GetAsync(long id)
+            => _mapper.Map<ProductModel>(await _serviceManager.ProductService.GetAsync(id));
 
-        public async Task<IEnumerable<ProductViewModel>> GetAll()
-            => _mapper.Map<IEnumerable<ProductViewModel>>(await _serviceManager.ProductService.GetAll());
+        public async Task<IEnumerable<ProductModel>> GetAllAsync()
+            => _mapper.Map<IEnumerable<ProductModel>>(await _serviceManager.ProductService.GetAllAsync());
 
-        public void Remove(long id)
-            => _serviceManager.ProductService.Remove(id);
+        public Task<bool> RemoveAsync(long id)
+            => _serviceManager.ProductService.RemoveAsync(id);
 
-        public void Update(ProductViewModel entity)
-            => _serviceManager.ProductService.Update(_mapper.Map<ProductDTO>(entity));
+        public Task<bool> UpdateAsync(ProductModel entity)
+            => _serviceManager.ProductService.UpdateAsync(_mapper.Map<ProductDTO>(entity));
     }
 }

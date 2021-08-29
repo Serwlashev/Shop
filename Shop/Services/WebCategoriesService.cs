@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
-using Services.DTO;
-using Services.Interfaces;
+using Services.Abstract.DTO;
+using Services.Abstract.Interfaces;
 using Shop.Models;
 using Shop.Services.Interfaces;
 using System.Collections.Generic;
@@ -19,19 +19,19 @@ namespace Shop.Services
             _mapper = mapper;
         }
 
-        public void Create(CategoryViewModel entity)
-            => _serviceManager.CategoryService.Create(_mapper.Map<CategoryDTO>(entity));
+        public async Task<bool> CreateAsync(CategoryModel entity)
+            => await _serviceManager.CategoryService.CreateAsync(_mapper.Map<CategoryDTO>(entity));
 
-        public async Task<CategoryViewModel> Get(long id)
-            => _mapper.Map<CategoryViewModel>(await _serviceManager.CategoryService.Get(id));
+        public async Task<CategoryModel> GetAsync(long id)
+            => _mapper.Map<CategoryModel>(await _serviceManager.CategoryService.GetAsync(id));
 
-        public async Task<IEnumerable<CategoryViewModel>> GetAll()
-            => _mapper.Map<IEnumerable<CategoryViewModel>>(await _serviceManager.CategoryService.GetAll());
+        public async Task<IEnumerable<CategoryModel>> GetAllAsync()
+            => _mapper.Map<IEnumerable<CategoryModel>>(await _serviceManager.CategoryService.GetAllAsync());
 
-        public void Remove(long id)
-            => _serviceManager.CategoryService.Remove(id);
+        public Task<bool> RemoveAsync(long id)
+            => _serviceManager.CategoryService.RemoveAsync(id);
 
-        public void Update(CategoryViewModel entity)
-            => _serviceManager.CategoryService.Update(_mapper.Map<CategoryDTO>(entity));
+        public Task<bool> UpdateAsync(CategoryModel entity)
+            => _serviceManager.CategoryService.UpdateAsync(_mapper.Map<CategoryDTO>(entity));
     }
 }

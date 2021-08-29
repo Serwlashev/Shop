@@ -11,10 +11,5 @@ namespace Database.Implementation.Repositories
             : base(context)
         {
         }
-
-        public override void Update(Product entity)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

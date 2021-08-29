@@ -1,7 +1,7 @@
 ﻿
 using AutoMapper;
 using Domain.Repository;
-using Services.Interfaces;
+using Services.Abstract.Interfaces;
 using System;
 
 namespace Services.Impementation

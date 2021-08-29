@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
 using Domain.Entity;
-using Services.DTO;
+using Services.Abstract.DTO;
 
-namespace Services.Mapping
+namespace Services.Abstract.Mapping
 {
     public class ModelMappingProfile : Profile
     {

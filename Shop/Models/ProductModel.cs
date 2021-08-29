@@ -1,11 +1,11 @@
 ﻿namespace Shop.Models
 {
-    public class ProductViewModel
+    public class ProductModel
     {
         public long Id { get; set; }
         public string Name { get; set; }
-        public decimal Price { get; set; }
-        public CategoryViewModel Category { get; set; }
+        public double Price { get; set; }
+        public CategoryModel Category { get; set; }
         public int Number { get; set; }
     }
 }

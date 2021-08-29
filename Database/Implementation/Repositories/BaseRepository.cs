@@ -12,7 +12,6 @@ namespace Database.Implementation.Repositories
         where TValue : BaseEntity<TKey>
     {
         protected readonly ApplicationDbContext _context;
-
         protected DbSet<TValue> Table => _context.Set<TValue>();
 
         public BaseRepository(ApplicationDbContext context)
@@ -20,18 +19,19 @@ namespace Database.Implementation.Repositories
             _context = context;
         }
 
-        public async Task<IEnumerable<TValue>> GetAll()
+        public async Task<IEnumerable<TValue>> GetAllAsync()
             => await Table.ToListAsync();
 
-        public async Task<TValue> Get(TKey id)
+        public async Task<TValue> GetAsync(TKey id)
             => await Table.FindAsync(id);
 
         public void Create(TValue entity)
             => Table.Add(entity);
 
         public async void Remove(TKey id)
-            => Table.Remove(await Get(id));
+            => Table.Remove(await GetAsync(id));
 
-        public abstract void Update(TValue entity);
+        public void Update(TValue entity)
+            => Table.Update(entity);
     }
 }

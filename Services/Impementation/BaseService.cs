@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using Domain.Repository;
-using Services.Interfaces;
+using Services.Abstract.Interfaces;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -17,10 +17,10 @@ namespace Services.Impementation
             _mapper = mapper;
         }
 
-        public abstract void Create(TValue entity);
-        public abstract Task<TValue> Get(TKey id);
-        public abstract Task<IEnumerable<TValue>> GetAll();
-        public abstract void Remove(TKey id);
-        public abstract void Update(TValue entity);
+        public abstract Task<bool> CreateAsync(TValue entity);
+        public abstract Task<TValue> GetAsync(TKey id);
+        public abstract Task<IEnumerable<TValue>> GetAllAsync();
+        public abstract Task<bool> RemoveAsync(TKey id);
+        public abstract Task<bool> UpdateAsync(TValue entity);
     }
 }

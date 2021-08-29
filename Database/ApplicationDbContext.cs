@@ -5,10 +5,10 @@ namespace Infrastructure.Database
 {
     public class ApplicationDbContext : DbContext
     {
-        public DbSet<Product> Products { get; set; }
         public DbSet<Category> Categories { get; set; }
+        public DbSet<Product> Products { get; set; }
 
-        public ApplicationDbContext(DbContextOptions<DbContext> options)
+        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {
             Database.EnsureCreated();

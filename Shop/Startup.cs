@@ -8,12 +8,13 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Services.Abstract.Interfaces;
+using Services.Abstract.Mapping;
 using Services.Impementation;
-using Services.Interfaces;
-using Services.Mapping;
 using Shop.Mapping;
 using Shop.Services;
 using Shop.Services.Interfaces;
+using System;
 
 namespace Shop
 {
@@ -36,16 +37,10 @@ namespace Shop
             var mappingConfig = new MapperConfiguration(mc =>
             {
                 mc.AddProfile(new ModelMappingProfile());
-            });
-
-            services.AddSingleton(mappingConfig.CreateMapper());
-
-            var webMappingConfig = new MapperConfiguration(mc =>
-            {
                 mc.AddProfile(new MappingProfile());
             });
 
-            services.AddSingleton(webMappingConfig);
+            services.AddSingleton(mappingConfig.CreateMapper());
 
             #endregion
 
@@ -56,7 +51,7 @@ namespace Shop
             
             services.AddTransient<IWebCategoriesService, WebCategoriesService>();
             services.AddTransient<IWebProductsService, WebProductsService>();
-            
+
             #endregion
 
             #region Database configuration

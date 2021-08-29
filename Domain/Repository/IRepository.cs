@@ -8,8 +8,8 @@ namespace Domain.Repository
         where TKey : struct
         where TValue : BaseEntity<TKey>
     {
-        Task<IEnumerable<TValue>> GetAll();
-        Task<TValue> Get(TKey id);
+        Task<IEnumerable<TValue>> GetAllAsync();
+        Task<TValue> GetAsync(TKey id);
         void Create(TValue entity);
         void Remove(TKey id);
         void Update(TValue entity);

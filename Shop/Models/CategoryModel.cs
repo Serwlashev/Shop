@@ -2,10 +2,10 @@
 
 namespace Shop.Models
 {
-    public class CategoryViewModel
+    public class CategoryModel
     {
         public long Id { get; set; }
         public string Name { get; set; }
-        public List<ProductViewModel> Products { get; set; }
+        public List<ProductModel> Products { get; set; }
     }
 }

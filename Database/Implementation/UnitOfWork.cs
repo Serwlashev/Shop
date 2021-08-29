@@ -8,21 +8,21 @@ namespace Database.Implementation
 {
     public class UnitOfWork : IUnitOfWork
     {
-        private readonly ApplicationDbContext db;
+        private readonly ApplicationDbContext _applicationContext;
         private IRepository<long, Category> _categoriesRepository;
         private IRepository<long, Product> _productsRepository;
 
         public IRepository<long, Product> ProductsRepository
-            => _productsRepository ??= new ProductsRepository(db);
+            => _productsRepository ??= new ProductsRepository(_applicationContext);
         public IRepository<long, Category> CategoriesRepository
-            => _categoriesRepository ??= new CategoriesRepository(db);
+            => _categoriesRepository ??= new CategoriesRepository(_applicationContext);
 
         public UnitOfWork(ApplicationDbContext context)
         {
-            db = context;
+            _applicationContext = context;
         }
 
         public async Task SaveChangesAsync()
-            => await db.SaveChangesAsync();
+            => await _applicationContext.SaveChangesAsync();
     }
 }

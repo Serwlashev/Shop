@@ -1,0 +1,19 @@
+﻿@using Shop.Models
+@model ProductModel
+
+<form method="post">
+    <input type="hidden" name="id" value="@Model.Id" />
+    <div class="form-group">
+        <label for="name-input">Name</label>
+        <input type="text" name="name" value="@Model.Name" class="form-control" id="name-input">
+    </div>
+    <div class="form-group">
+        <label for="price-input">Price</label>
+        <input type="number" step="any" name="price" value="@Model.Price" class="form-control" id="price-input">
+    </div>
+    <div class="form-group">
+        <label for="number-input">Number</label>
+        <input type="number" min="0" max="1000000" step="1" name="number" value="@Model.Number" class="form-control" id="price-input">
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>

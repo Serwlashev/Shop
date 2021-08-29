@@ -1,0 +1,6 @@
+﻿@using Shop.Models
+@model ProductModel
+
+<a asp-action="Index">Back to list</a>
+<h3>Product</h3>
+@await Html.PartialAsync("_Product", Model)

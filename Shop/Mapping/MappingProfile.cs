@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using Services.DTO;
+using Services.Abstract.DTO;
 using Shop.Models;
 
 namespace Shop.Mapping
@@ -8,11 +8,11 @@ namespace Shop.Mapping
     {
         public MappingProfile()
         {
-            CreateMap<CategoryViewModel, CategoryDTO>();
-            CreateMap<CategoryDTO, CategoryViewModel>();
+            CreateMap<CategoryModel, CategoryDTO>();
+            CreateMap<CategoryDTO, CategoryModel>();
 
-            CreateMap<ProductViewModel, ProductDTO>();
-            CreateMap<ProductDTO, ProductViewModel>();
+            CreateMap<ProductModel, ProductDTO>();
+            CreateMap<ProductDTO, ProductModel>();
         }
     }
 }
