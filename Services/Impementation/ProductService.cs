@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using Domain.Entity;
-using Domain.Repository;
+using Domain.Interfaces.Repository;
 using Services.Abstract.DTO;
 using Services.Abstract.Interfaces;
 using System.Collections.Generic;
@@ -39,7 +39,8 @@ namespace Services.Impementation
 
         public async override Task<bool> RemoveAsync(long id)
         {
-            _uow.ProductsRepository.Remove(id);
+            var product = await _uow.ProductsRepository.GetAsync(id);
+            _uow.ProductsRepository.Remove(product);
             await _uow.SaveChangesAsync();
 
             return true;

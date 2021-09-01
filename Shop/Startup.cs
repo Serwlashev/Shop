@@ -1,6 +1,6 @@
 using AutoMapper;
 using Database.Implementation;
-using Domain.Repository;
+using Domain.Interfaces.Repository;
 using Infrastructure.Database;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -14,7 +14,6 @@ using Services.Impementation;
 using Shop.Mapping;
 using Shop.Services;
 using Shop.Services.Interfaces;
-using System;
 
 namespace Shop
 {
@@ -49,8 +48,8 @@ namespace Shop
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped<IServiceManager, ServiceManager>();
             
-            services.AddTransient<IWebCategoriesService, WebCategoriesService>();
-            services.AddTransient<IWebProductsService, WebProductsService>();
+            services.AddScoped<IWebCategoriesService, WebCategoriesService>();
+            services.AddScoped<IWebProductsService, WebProductsService>();
 
             #endregion
 
@@ -87,8 +86,9 @@ namespace Shop
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{controller=Products}/{action=Index}");
             });
         }
+
     }
 }

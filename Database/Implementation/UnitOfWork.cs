@@ -1,6 +1,6 @@
 ﻿using Database.Implementation.Repositories;
 using Domain.Entity;
-using Domain.Repository;
+using Domain.Interfaces.Repository;
 using Infrastructure.Database;
 using System.Threading.Tasks;
 

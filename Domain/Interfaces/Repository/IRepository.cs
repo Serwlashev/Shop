@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace Domain.Repository
+namespace Domain.Interfaces.Repository
 {
     public interface IRepository<TKey, TValue>
         where TKey : struct
@@ -11,7 +11,7 @@ namespace Domain.Repository
         Task<IEnumerable<TValue>> GetAllAsync();
         Task<TValue> GetAsync(TKey id);
         void Create(TValue entity);
-        void Remove(TKey id);
+        void Remove(TValue entity);
         void Update(TValue entity);
     }
 }

@@ -1,5 +1,5 @@
 ﻿using Domain.Entity;
-using Domain.Repository;
+using Domain.Interfaces.Repository;
 using Infrastructure.Database;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
@@ -28,8 +28,8 @@ namespace Database.Implementation.Repositories
         public void Create(TValue entity)
             => Table.Add(entity);
 
-        public async void Remove(TKey id)
-            => Table.Remove(await GetAsync(id));
+        public void Remove(TValue entity)
+            => Table.Remove(entity);
 
         public void Update(TValue entity)
             => Table.Update(entity);

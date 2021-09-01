@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using Domain.Repository;
+using Domain.Interfaces.Repository;
 using Services.Abstract.Interfaces;
 using System.Collections.Generic;
 using System.Threading.Tasks;

@@ -69,9 +69,7 @@ namespace Shop.Controllers
                 return BadRequest("Product was not found");
             }
 
-            var updatedProduct = await _productsService.GetAsync(product.Id);
-
-            return View(updatedProduct);
+            return RedirectToAction($"Detail", new { id = product.Id });
         }
 
         public async Task<IActionResult> Detail(long? id)
