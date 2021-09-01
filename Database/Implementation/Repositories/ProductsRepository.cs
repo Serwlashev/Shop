@@ -1,6 +1,7 @@
 ﻿using Domain.Entity;
 using Infrastructure.Database;
-using System;
+using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Database.Implementation.Repositories
@@ -11,5 +12,8 @@ namespace Database.Implementation.Repositories
             : base(context)
         {
         }
+
+        public override async Task<IEnumerable<Product>> GetAllAsync()
+            => await _context.Products.Include(p => p.Category).ToListAsync();
     }
 }

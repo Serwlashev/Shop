@@ -1,15 +1,15 @@
 ﻿@using Shop.Models
 @model ProductModel
 
-<div class="card" style="width: 19rem;">
-    <img src="https://img.icons8.com/plasticine/2x/person-male.png" class="card-img-top" alt="...">
+<div class="card product-item">
+    <img src="https://www.prameyanews.com/wp-content/uploads/2019/12/packaged-food.jpg" class="card-img-top" alt="...">
     <div class="card-body">
         <h5 class="card-title">@Model.Name</h5>
         <div class="card-text">
+            <p>Category: @Model.Category.Name</p>
             <p>Price: @Model.Price</p>
             <p>Number: @Model.Number</p>
         </div>
-        <a asp-action="Index" class="btn btn-primary">Buy</a>
         <div style="margin: 5px;">
             <p>
                 <a type="button" class="btn btn-primary" asp-action="Update" asp-route-id="@Model.Id">

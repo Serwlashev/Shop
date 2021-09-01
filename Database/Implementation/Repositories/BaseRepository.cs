@@ -19,7 +19,7 @@ namespace Database.Implementation.Repositories
             _context = context;
         }
 
-        public async Task<IEnumerable<TValue>> GetAllAsync()
+        public virtual async Task<IEnumerable<TValue>> GetAllAsync()
             => await Table.ToListAsync();
 
         public async Task<TValue> GetAsync(TKey id)

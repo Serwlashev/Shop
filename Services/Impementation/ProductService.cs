@@ -25,16 +25,16 @@ namespace Services.Impementation
 
         public async override Task<ProductDTO> GetAsync(long id)
         {
-            var category = await _uow.ProductsRepository.GetAsync(id);
+            var product = await _uow.ProductsRepository.GetAsync(id);
 
-            return _mapper.Map<ProductDTO>(category);
+            return _mapper.Map<ProductDTO>(product);
         }
 
         public async override Task<IEnumerable<ProductDTO>> GetAllAsync()
         {
-            var category = await _uow.ProductsRepository.GetAllAsync();
+            var products = await _uow.ProductsRepository.GetAllAsync();
 
-            return _mapper.Map<IEnumerable<ProductDTO>>(category);
+            return _mapper.Map<IEnumerable<ProductDTO>>(products);
         }
 
         public async override Task<bool> RemoveAsync(long id)

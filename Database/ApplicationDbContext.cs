@@ -1,7 +1,6 @@
 ﻿using Domain.Entity;
 using Microsoft.EntityFrameworkCore;
 using System;
-using System.Collections.Generic;
 
 namespace Infrastructure.Database
 {
@@ -28,7 +27,7 @@ namespace Infrastructure.Database
 
             builder.Entity<Category>().HasData(
                 new Category { Id = 1, Name = "Bakery", CreatedAt = DateTime.Now },
-                new Category { Id = 2, Name = "Diary", CreatedAt = DateTime.Now },
+                new Category { Id = 2, Name = "Dairy", CreatedAt = DateTime.Now },
                 new Category { Id = 3, Name = "Cereals", CreatedAt = DateTime.Now },
                 new Category { Id = 4, Name = "Alcohol", CreatedAt = DateTime.Now }
                 );

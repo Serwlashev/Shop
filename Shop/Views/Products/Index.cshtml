@@ -3,17 +3,14 @@
 <h1>Products</h1>
 <a asp-action="Create">Create</a>
 
-@if (Model.Products.Count > 0)
-{
-    @foreach (var product in Model.Products)
+<div class="products-container">
+    @if (Model.Products.Count > 0)
     {
-        <div class="person-info">
-            @await Html.PartialAsync("_Product", product)
-            <div class="product-actions">
-                <a asp-action="Delete" asp-route-id="@product.Id">Delete</a> |
-                <a asp-action="Update" asp-route-id="@product.Id">Edit</a> |
-                <a asp-action="Detail" asp-route-id="@product.Id">Detail</a>
+        @foreach (var product in Model.Products)
+        {
+            <div>
+                @await Html.PartialAsync("_Product", product)
             </div>
-        </div>
+        }
     }
-}
+</div>
