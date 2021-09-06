@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Domain.Entity
+namespace Core.Domain.Entity
 {
     public class Category : BaseEntity<long>
     {

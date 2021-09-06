@@ -1,10 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Shop.Models;
-using Shop.Services.Interfaces;
+using Presentation.Shop.Models;
+using Presentation.Shop.Services.Interfaces;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Shop.Controllers
+namespace Presentation.Shop.Controllers
 {
     public class ProductsController : Controller
     {

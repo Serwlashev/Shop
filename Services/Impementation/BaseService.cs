@@ -1,10 +1,10 @@
-﻿using AutoMapper;
-using Domain.Interfaces.Repository;
-using Services.Abstract.Interfaces;
+﻿using Core.Application.Interfaces;
+using AutoMapper;
+using Core.Domain.Interfaces.Repository;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace Services.Impementation
+namespace Infrastructure.Services.Impementation
 {
     public abstract class BaseService<TKey, TValue> : IBaseService<TKey, TValue>
     {

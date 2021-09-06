@@ -9,8 +9,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Database\Database.csproj" />
-    <ProjectReference Include="..\Services.Abstract\Services.Abstract.csproj" />
+    <ProjectReference Include="..\Database\Persistence.csproj" />
+    <ProjectReference Include="..\Services.Abstract\Application.csproj" />
   </ItemGroup>
 
 </Project>

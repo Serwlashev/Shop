@@ -1,10 +1,9 @@
-﻿
+﻿using Core.Application.Interfaces;
 using AutoMapper;
-using Domain.Interfaces.Repository;
-using Services.Abstract.Interfaces;
+using Core.Domain.Interfaces.Repository;
 using System;
 
-namespace Services.Impementation
+namespace Infrastructure.Services.Impementation
 {
     public class ServiceManager : IServiceManager
     {

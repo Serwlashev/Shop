@@ -1,4 +1,4 @@
-﻿namespace Services.Abstract.Interfaces
+﻿namespace Core.Application.Interfaces
 {
     public interface IServiceManager
     {

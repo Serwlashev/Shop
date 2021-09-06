@@ -1,11 +1,10 @@
-﻿using Domain.Entity;
-using Domain.Interfaces.Repository;
-using Infrastructure.Database;
+﻿using Core.Domain.Entity;
+using Core.Domain.Interfaces.Repository;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace Database.Implementation.Repositories
+namespace Infrastructure.Persistence.Implementation.Repositories
 {
     public abstract class BaseRepository<TKey, TValue> : IRepository<TKey, TValue>
         where TKey : struct

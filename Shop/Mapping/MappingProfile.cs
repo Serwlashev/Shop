@@ -1,8 +1,8 @@
-﻿using AutoMapper;
-using Services.Abstract.DTO;
-using Shop.Models;
+﻿using Core.Application.DTO;
+using AutoMapper;
+using Presentation.Shop.Models;
 
-namespace Shop.Mapping
+namespace Presentation.Shop.Mapping
 {
     public class MappingProfile : Profile
     {

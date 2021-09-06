@@ -1,4 +1,4 @@
-﻿namespace Services.Abstract.DTO
+﻿namespace Core.Application.DTO
 {
     public class ProductDTO
     {

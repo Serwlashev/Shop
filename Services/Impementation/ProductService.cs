@@ -1,12 +1,12 @@
-﻿using AutoMapper;
-using Domain.Entity;
-using Domain.Interfaces.Repository;
-using Services.Abstract.DTO;
-using Services.Abstract.Interfaces;
+﻿using Core.Application.DTO;
+using Core.Application.Interfaces;
+using AutoMapper;
+using Core.Domain.Entity;
+using Core.Domain.Interfaces.Repository;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace Services.Impementation
+namespace Infrastructure.Services.Impementation
 {
     public class ProductService : BaseService<long, ProductDTO>, IProductService
     {

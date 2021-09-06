@@ -1,6 +1,6 @@
-﻿using Services.Abstract.DTO;
+﻿using Core.Application.DTO;
 
-namespace Services.Abstract.Interfaces
+namespace Core.Application.Interfaces
 {
     public interface IProductService : IBaseService<long, ProductDTO>
     {

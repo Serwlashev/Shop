@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace Services.Abstract.Interfaces
+namespace Core.Application.Interfaces
 {
     public interface IBaseService<TKey, TValue>
     {

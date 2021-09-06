@@ -1,8 +1,8 @@
-﻿using Shop.Models;
+﻿using Presentation.Shop.Models;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace Shop.Services.Interfaces
+namespace Presentation.Shop.Services.Interfaces
 {
     public interface IWebProductsService
     {

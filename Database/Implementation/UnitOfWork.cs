@@ -1,10 +1,9 @@
-﻿using Database.Implementation.Repositories;
-using Domain.Entity;
-using Domain.Interfaces.Repository;
-using Infrastructure.Database;
+﻿using Core.Domain.Entity;
+using Core.Domain.Interfaces.Repository;
+using Infrastructure.Persistence.Implementation.Repositories;
 using System.Threading.Tasks;
 
-namespace Database.Implementation
+namespace Infrastructure.Persistence.Implementation
 {
     public class UnitOfWork : IUnitOfWork
     {

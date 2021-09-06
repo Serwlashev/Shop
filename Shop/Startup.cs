@@ -1,21 +1,21 @@
+using Core.Application.Interfaces;
+using Core.Application.Mapping;
 using AutoMapper;
-using Database.Implementation;
-using Domain.Interfaces.Repository;
-using Infrastructure.Database;
+using Core.Domain.Interfaces.Repository;
+using Infrastructure.Services.Impementation;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Services.Abstract.Interfaces;
-using Services.Abstract.Mapping;
-using Services.Impementation;
-using Shop.Mapping;
-using Shop.Services;
-using Shop.Services.Interfaces;
+using Infrastructure.Persistence;
+using Infrastructure.Persistence.Implementation;
+using Presentation.Shop.Mapping;
+using Presentation.Shop.Services;
+using Presentation.Shop.Services.Interfaces;
 
-namespace Shop
+namespace Presentation.Shop
 {
     public class Startup
     {

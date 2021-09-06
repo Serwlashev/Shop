@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Shop.Models
+namespace Presentation.Shop.Models
 {
     public class CategoryModel
     {

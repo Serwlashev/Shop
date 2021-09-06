@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 
-namespace Shop.Mapping
+namespace Presentation.Shop.Mapping
 {
     public interface IWebMapper : IMapper
     {

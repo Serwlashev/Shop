@@ -1,12 +1,12 @@
 ﻿using AutoMapper;
-using Domain.Entity;
-using Domain.Interfaces.Repository;
-using Services.Abstract.DTO;
-using Services.Abstract.Interfaces;
+using Core.Application.Interfaces;
+using Core.Application.DTO;
+using Core.Domain.Interfaces.Repository;
+using Core.Domain.Entity;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace Services.Impementation
+namespace Infrastructure.Services.Impementation
 {
     public class CategoryService : BaseService<long, CategoryDTO>, ICategoryService
     {

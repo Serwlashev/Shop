@@ -1,4 +1,4 @@
-﻿namespace Shop.Models
+﻿namespace Presentation.Shop.Models
 {
     public class ProductModel
     {

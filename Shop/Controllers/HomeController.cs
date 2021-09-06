@@ -1,13 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using Shop.Models;
-using System;
-using System.Collections.Generic;
+using Presentation.Shop.Models;
 using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
 
-namespace Shop.Controllers
+namespace Presentation.Shop.Controllers
 {
     public class HomeController : Controller
     {

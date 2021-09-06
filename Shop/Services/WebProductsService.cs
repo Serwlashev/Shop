@@ -1,12 +1,12 @@
-﻿using AutoMapper;
-using Services.Abstract.DTO;
-using Services.Abstract.Interfaces;
-using Shop.Models;
-using Shop.Services.Interfaces;
+﻿using Core.Application.DTO;
+using Core.Application.Interfaces;
+using AutoMapper;
+using Presentation.Shop.Models;
+using Presentation.Shop.Services.Interfaces;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace Shop.Services
+namespace Presentation.Shop.Services
 {
     public class WebProductsService : IWebProductsService
     {

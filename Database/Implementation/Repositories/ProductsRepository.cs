@@ -1,14 +1,13 @@
-﻿using Domain.Entity;
-using Infrastructure.Database;
+﻿using Core.Domain.Entity;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace Database.Implementation.Repositories
+namespace Infrastructure.Persistence.Implementation.Repositories
 {
     public class ProductsRepository : BaseRepository<long, Product>
     {
-        public ProductsRepository(ApplicationDbContext context) 
+        public ProductsRepository(ApplicationDbContext context)
             : base(context)
         {
         }

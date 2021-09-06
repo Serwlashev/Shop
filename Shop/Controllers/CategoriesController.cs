@@ -1,11 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Shop.Services.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using Presentation.Shop.Services.Interfaces;
 
-namespace Shop.Controllers
+namespace Presentation.Shop.Controllers
 {
     public class CategoriesController : Controller
     {

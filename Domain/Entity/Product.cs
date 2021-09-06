@@ -1,4 +1,4 @@
-﻿namespace Domain.Entity
+﻿namespace Core.Domain.Entity
 {
     public class Product : BaseEntity<long>
     {

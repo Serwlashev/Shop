@@ -1,9 +1,6 @@
-﻿using Domain.Entity;
-using Infrastructure.Database;
-using System;
-using System.Threading.Tasks;
+﻿using Core.Domain.Entity;
 
-namespace Database.Implementation.Repositories
+namespace Infrastructure.Persistence.Implementation.Repositories
 {
     public class CategoriesRepository : BaseRepository<long, Category>
     {

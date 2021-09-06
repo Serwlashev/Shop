@@ -1,8 +1,8 @@
-﻿using Domain.Entity;
+﻿using Core.Domain.Entity;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace Domain.Interfaces.Repository
+namespace Core.Domain.Interfaces.Repository
 {
     public interface IRepository<TKey, TValue>
         where TKey : struct
