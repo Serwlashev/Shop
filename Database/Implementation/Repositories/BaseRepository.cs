@@ -1,7 +1,9 @@
 ﻿using Core.Domain.Entity;
 using Core.Domain.Interfaces.Repository;
+using Domain.Exceptions;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Infrastructure.Persistence.Implementation.Repositories
@@ -19,18 +21,50 @@ namespace Infrastructure.Persistence.Implementation.Repositories
         }
 
         public virtual async Task<IEnumerable<TValue>> GetAllAsync()
-            => await Table.ToListAsync();
+        {
+            var entities = await Table.ToListAsync();
+
+            if(!entities.Any())
+            {
+                throw new NotFoundException("Not found");
+            }
+
+            return entities;
+        }
 
         public async Task<TValue> GetAsync(TKey id)
-            => await Table.FindAsync(id);
+        {
+            var entity = await Table.FindAsync(id);
+
+            if(entity == null)
+            {
+                throw new NotFoundException("Entity not found");
+            }
+
+            return entity;
+        }
 
         public void Create(TValue entity)
             => Table.Add(entity);
 
-        public void Remove(TValue entity)
-            => Table.Remove(entity);
+        public virtual void Remove(TValue entity)
+        {
+            if(!Table.Contains(entity))
+            {
+                throw new NotFoundException("Cannot remove entity because it does not exist");
+            }
+
+            Table.Remove(entity);
+        }
 
         public void Update(TValue entity)
-            => Table.Update(entity);
+        {
+            if (!Table.Contains(entity))
+            {
+                throw new NotFoundException("Cannot update entity because it does not exist");
+            }
+
+            Table.Update(entity);
+        }
     }
 }

@@ -12,6 +12,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using System;
 using System.Reflection;
+using WebAPI.Middleware;
 
 namespace WebAPI
 {
@@ -79,6 +80,8 @@ namespace WebAPI
             app.UseRouting();
 
             app.UseAuthorization();
+
+            app.UseMiddleware<ExceptionHandleMiddleware>();
 
             app.UseEndpoints(endpoints =>
             {
