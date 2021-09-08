@@ -22,7 +22,7 @@ namespace Core.Application.Features.Commands.CreateProduct
                 Name = request.Name,
                 Price = request.Price,
                 Number = request.Number,
-                Category = new CategoryDTO { Id = request.CategoryId }
+                CategoryId = request.CategoryId
             };
 
             bool result = await _serviceManager.ProductService.CreateAsync(product);
