@@ -8,11 +8,11 @@ namespace Presentation.Shop.Mapping
     {
         public MappingProfile()
         {
-            CreateMap<CategoryModel, CategoryDTO>();
-            CreateMap<CategoryDTO, CategoryModel>();
+            CreateMap<CategoryModel, CategoryDTO>()
+                .ReverseMap();
 
-            CreateMap<ProductModel, ProductDTO>();
-            CreateMap<ProductDTO, ProductModel>();
+            CreateMap<ProductModel, CategoryDTO>()
+                .ReverseMap();
         }
     }
 }

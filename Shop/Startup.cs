@@ -1,8 +1,5 @@
-using Core.Application.Interfaces;
 using Core.Application.Mapping;
 using AutoMapper;
-using Core.Domain.Interfaces.Repository;
-using Infrastructure.Services.Impementation;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -10,10 +7,10 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Infrastructure.Persistence;
-using Infrastructure.Persistence.Implementation;
 using Presentation.Shop.Mapping;
 using Presentation.Shop.Services;
 using Presentation.Shop.Services.Interfaces;
+using Infrastructure.Services;
 
 namespace Presentation.Shop
 {
@@ -45,9 +42,9 @@ namespace Presentation.Shop
 
             #region Services configuration
 
-            services.AddScoped<IUnitOfWork, UnitOfWork>();
-            services.AddScoped<IServiceManager, ServiceManager>();
-            
+            services.AddPersistenceServices();
+            services.AddInfrastructureServices();
+
             services.AddScoped<IWebCategoriesService, WebCategoriesService>();
             services.AddScoped<IWebProductsService, WebProductsService>();
 
