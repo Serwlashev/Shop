@@ -21,7 +21,7 @@ namespace Core.Application.Features.Commands.DeleteProduct
             return new DeleteProductCommandResponse
             {
                 Succeed = result,
-                Message = result ? $"Product was successfully added" : $"Cannot delete product!"
+                Message = result ? $"Product was successfully removed" : $"Cannot delete product!"
             };
         }
     }

@@ -4,6 +4,7 @@ using Core.Domain.Entity;
 using Core.Application.Features.Queries.GetAllProduct;
 using Core.Application.Features.Queries.GetByIdProduct;
 using Core.Application.Features.Queries.GetByIdCategory;
+using Core.Application.Features.Queries.GetAllCategory;
 
 namespace Core.Application.Mapping
 {
@@ -20,6 +21,8 @@ namespace Core.Application.Mapping
             CreateMap<ProductDTO, GetAllProductQueryResponse>();
 
             CreateMap<ProductDTO, GetByIdProductQueryResponse>();
+
+            CreateMap<CategoryDTO, GetAllCategoryQueryResponse>();
 
             CreateMap<CategoryDTO, GetByIdCategoryQueryResponse>();
 

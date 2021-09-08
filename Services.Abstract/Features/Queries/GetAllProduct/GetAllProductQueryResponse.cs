@@ -7,7 +7,7 @@ namespace Core.Application.Features.Queries.GetAllProduct
         public long Id { get; set; }
         public string Name { get; set; }
         public double Price { get; set; }
-        //public CategoryDTO Category { get; set; }
+        public long CategoryId { get; set; }
         public int Number { get; set; }
     }
 }
