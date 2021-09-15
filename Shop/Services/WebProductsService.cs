@@ -20,7 +20,7 @@ namespace Presentation.Shop.Services
         }
 
         public async Task<bool> CreateAsync(ProductModel entity)
-            => await _serviceManager.ProductService.CreateAsync(_mapper.Map<CategoryDTO>(entity));
+            => await _serviceManager.ProductService.CreateAsync(_mapper.Map<ProductDTO>(entity));
 
         public async Task<ProductModel> GetAsync(long id)
             => _mapper.Map<ProductModel>(await _serviceManager.ProductService.GetAsync(id));
@@ -32,6 +32,6 @@ namespace Presentation.Shop.Services
             => _serviceManager.ProductService.RemoveAsync(id);
 
         public Task<bool> UpdateAsync(ProductModel entity)
-            => _serviceManager.ProductService.UpdateAsync(_mapper.Map<CategoryDTO>(entity));
+            => _serviceManager.ProductService.UpdateAsync(_mapper.Map<ProductDTO>(entity));
     }
 }

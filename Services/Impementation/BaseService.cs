@@ -3,6 +3,8 @@ using AutoMapper;
 using Core.Domain.Interfaces.Repository;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using System;
+using System.Linq.Expressions;
 
 namespace Infrastructure.Services.Impementation
 {
@@ -22,5 +24,6 @@ namespace Infrastructure.Services.Impementation
         public abstract Task<IEnumerable<TValue>> GetAllAsync();
         public abstract Task<bool> RemoveAsync(TKey id);
         public abstract Task<bool> UpdateAsync(TValue entity);
+        public abstract Task<IEnumerable<TValue>> GetByConditionAsync(Expression<Func<TValue, bool>> predicate);
     }
 }

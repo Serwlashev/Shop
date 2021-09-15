@@ -1,17 +1,21 @@
 using AutoMapper;
+using AutoMapper.Extensions.ExpressionMapping;
 using Core.Application.Mapping;
 using Infrastructure.Persistence;
 using Infrastructure.Services;
 using MediatR;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System;
 using System.Reflection;
+using WebAPI.Authentication;
 using WebAPI.Middleware;
 
 namespace WebAPI
@@ -28,6 +32,21 @@ namespace WebAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+                .AddJwtBearer(options =>
+                {
+                    options.RequireHttpsMetadata = false;
+                    options.TokenValidationParameters = new TokenValidationParameters
+                    {
+                        ValidateIssuer = true,
+                        ValidIssuer = AuthOptions.ISSUER,
+                        ValidateAudience = true,
+                        ValidAudience = AuthOptions.AUDIENCE,
+                        ValidateLifetime = true,
+                        IssuerSigningKey = AuthOptions.GetSymmetricSecurityKey(),
+                        ValidateIssuerSigningKey = true
+                    };
+                });
 
             services.AddControllers();
             services.AddSwaggerGen(c =>
@@ -37,12 +56,19 @@ namespace WebAPI
 
             #region Mapping configuration
 
-            var mappingConfig = new MapperConfiguration(mc =>
-            {
-                mc.AddProfile(new ModelMappingProfile());
-            });
+            //var mappingConfig = new MapperConfiguration(mc =>
+            //{
+            //    mc.AddExpressionMapping();
+            //    mc.AddProfile(new ModelMappingProfile());
+            //});
 
-            services.AddSingleton(mappingConfig.CreateMapper());
+            //services.AddSingleton(mappingConfig.CreateMapper());
+
+            services.AddAutoMapper(cfg =>
+            {
+                cfg.DisableConstructorMapping();
+                cfg.AddExpressionMapping();
+            }, typeof(ModelMappingProfile));
 
             #endregion
 
@@ -79,6 +105,7 @@ namespace WebAPI
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseMiddleware<ExceptionHandleMiddleware>();

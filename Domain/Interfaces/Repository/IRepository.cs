@@ -1,5 +1,7 @@
 ﻿using Core.Domain.Entity;
+using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 
 namespace Core.Domain.Interfaces.Repository
@@ -13,5 +15,6 @@ namespace Core.Domain.Interfaces.Repository
         void Create(TValue entity);
         void Remove(TValue entity);
         void Update(TValue entity);
+        Task<IEnumerable<TValue>> GetByConditionAsync(Expression<Func<TValue, bool>> predicate);
     }
 }

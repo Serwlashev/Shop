@@ -15,7 +15,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Services", "Services\Servic
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Persistence", "Database\Persistence.csproj", "{E97127E2-36B4-411C-AB32-E96257EE3EA7}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Application", "Services.Abstract\Application.csproj", "{FFAC8C3F-90C0-4173-AC71-8AE6A2B651E2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Application", "Application\Application.csproj", "{FFAC8C3F-90C0-4173-AC71-8AE6A2B651E2}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentation", "{A977C0AC-530C-4428-A048-D6E49CFE01B9}"
 EndProject

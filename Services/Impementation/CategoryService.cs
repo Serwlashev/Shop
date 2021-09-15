@@ -5,6 +5,8 @@ using Core.Domain.Interfaces.Repository;
 using Core.Domain.Entity;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using System;
+using System.Linq.Expressions;
 
 namespace Infrastructure.Services.Impementation
 {
@@ -52,6 +54,11 @@ namespace Infrastructure.Services.Impementation
             await _uow.SaveChangesAsync();
 
             return true;
+        }
+
+        public override Task<IEnumerable<CategoryDTO>> GetByConditionAsync(Expression<Func<CategoryDTO, bool>> predicate)
+        {
+            throw new NotImplementedException();
         }
     }
 }

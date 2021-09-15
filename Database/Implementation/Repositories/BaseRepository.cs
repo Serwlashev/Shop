@@ -2,8 +2,10 @@
 using Core.Domain.Interfaces.Repository;
 using Domain.Exceptions;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 
 namespace Infrastructure.Persistence.Implementation.Repositories
@@ -65,6 +67,11 @@ namespace Infrastructure.Persistence.Implementation.Repositories
             }
 
             Table.Update(entity);
+        }
+
+        public async Task<IEnumerable<TValue>> GetByConditionAsync(Expression<Func<TValue, bool>> predicate)
+        {
+            return await Table.Where(predicate).AsQueryable().ToListAsync();
         }
     }
 }

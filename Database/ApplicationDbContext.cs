@@ -8,6 +8,7 @@ namespace Infrastructure.Persistence
     {
         public DbSet<Category> Categories { get; set; }
         public DbSet<Product> Products { get; set; }
+        public DbSet<User> Users { get; set; }
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
@@ -24,6 +25,10 @@ namespace Infrastructure.Persistence
             .HasOne(p => p.Category)
             .WithMany(t => t.Products)
             .HasForeignKey(p => p.CategoryId);
+
+            builder.Entity<User>().HasData(
+                new User { Id = 1, Password = "1234", Email = "basya" }
+                );
 
             builder.Entity<Category>().HasData(
                 new Category { Id = 1, Name = "Bakery", CreatedAt = DateTime.Now },
