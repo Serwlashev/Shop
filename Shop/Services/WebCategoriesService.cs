@@ -1,8 +1,7 @@
-﻿using Core.Application.DTO;
-using Core.Application.Interfaces;
-using AutoMapper;
+﻿using AutoMapper;
 using Presentation.Shop.Models;
 using Presentation.Shop.Services.Interfaces;
+using Presentation.Shop.Utils.Interfaces;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -10,28 +9,26 @@ namespace Presentation.Shop.Services
 {
     public class WebCategoriesService : IWebCategoriesService
     {
-        private readonly IServiceManager _serviceManager;
-        private readonly IMapper _mapper;
+        private readonly IApiUtil _apiUtil;
 
-        public WebCategoriesService(IServiceManager serviceManager, IMapper mapper)
+        public WebCategoriesService(IApiUtil apiUtil)
         {
-            _serviceManager = serviceManager;
-            _mapper = mapper;
+            _apiUtil = apiUtil;
         }
 
         public async Task<bool> CreateAsync(CategoryModel entity)
-            => await _serviceManager.CategoryService.CreateAsync(_mapper.Map<CategoryDTO>(entity));
+            => await _apiUtil.PostAsync("", entity);
 
         public async Task<CategoryModel> GetAsync(long id)
-            => _mapper.Map<CategoryModel>(await _serviceManager.CategoryService.GetAsync(id));
+            => await _apiUtil.GetAsync<CategoryModel>($"/{id}");
 
         public async Task<IEnumerable<CategoryModel>> GetAllAsync()
-            => _mapper.Map<IEnumerable<CategoryModel>>(await _serviceManager.CategoryService.GetAllAsync());
+            => await _apiUtil.GetAsync<IEnumerable<CategoryModel>>("");
 
-        public Task<bool> RemoveAsync(long id)
-            => _serviceManager.CategoryService.RemoveAsync(id);
+        public async Task<bool> RemoveAsync(long id)
+            => await _apiUtil.DeleteAsync($"/{id}");
 
-        public Task<bool> UpdateAsync(CategoryModel entity)
-            => _serviceManager.CategoryService.UpdateAsync(_mapper.Map<CategoryDTO>(entity));
+        public async Task<bool> UpdateAsync(CategoryModel entity)
+            => await _apiUtil.PostAsync("", entity);
     }
 }

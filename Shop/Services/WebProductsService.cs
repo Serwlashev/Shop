@@ -1,8 +1,7 @@
-﻿using Core.Application.DTO;
-using Core.Application.Interfaces;
-using AutoMapper;
+﻿using AutoMapper;
 using Presentation.Shop.Models;
 using Presentation.Shop.Services.Interfaces;
+using Presentation.Shop.Utils.Interfaces;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -10,28 +9,26 @@ namespace Presentation.Shop.Services
 {
     public class WebProductsService : IWebProductsService
     {
-        private readonly IServiceManager _serviceManager;
-        private readonly IMapper _mapper;
+        private readonly IApiUtil _apiUtil;
 
-        public WebProductsService(IServiceManager serviceManager, IMapper mapper)
+        public WebProductsService(IApiUtil apiUtil)
         {
-            _serviceManager = serviceManager;
-            _mapper = mapper;
+            _apiUtil = apiUtil;
         }
 
         public async Task<bool> CreateAsync(ProductModel entity)
-            => await _serviceManager.ProductService.CreateAsync(_mapper.Map<ProductDTO>(entity));
+            => await _apiUtil.PostAsync("", entity);
 
         public async Task<ProductModel> GetAsync(long id)
-            => _mapper.Map<ProductModel>(await _serviceManager.ProductService.GetAsync(id));
+            => await _apiUtil.GetAsync<ProductModel>($"/{id}");
 
         public async Task<IEnumerable<ProductModel>> GetAllAsync()
-            => _mapper.Map<IEnumerable<ProductModel>>(await _serviceManager.ProductService.GetAllAsync());
+            => await _apiUtil.GetAsync<IEnumerable<ProductModel>>("");
 
-        public Task<bool> RemoveAsync(long id)
-            => _serviceManager.ProductService.RemoveAsync(id);
+        public async Task<bool> RemoveAsync(long id)
+            => await _apiUtil.DeleteAsync($"/{id}");
 
-        public Task<bool> UpdateAsync(ProductModel entity)
-            => _serviceManager.ProductService.UpdateAsync(_mapper.Map<ProductDTO>(entity));
+        public async Task<bool> UpdateAsync(ProductModel entity)
+            => await _apiUtil.PostAsync("", entity);
     }
 }

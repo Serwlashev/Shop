@@ -1,16 +1,15 @@
-using Core.Application.Mapping;
 using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Infrastructure.Persistence;
-using Presentation.Shop.Mapping;
 using Presentation.Shop.Services;
 using Presentation.Shop.Services.Interfaces;
-using Infrastructure.Services;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Http;
+using Presentation.Shop.Utils;
+using Presentation.Shop.Utils.Interfaces;
 
 namespace Presentation.Shop
 {
@@ -28,36 +27,18 @@ namespace Presentation.Shop
         {
             services.AddControllersWithViews();
 
-            #region Mapping configuration
-
-            var mappingConfig = new MapperConfiguration(mc =>
-            {
-                mc.AddProfile(new ModelMappingProfile());
-                mc.AddProfile(new MappingProfile());
-            });
-
-            services.AddSingleton(mappingConfig.CreateMapper());
-
-            #endregion
+            services.AddCors();
+            services.AddAuthorization();
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+                .AddCookie(options => options.LoginPath = new PathString("/accounts/login"));
 
             #region Services configuration
 
-            services.AddPersistenceServices();
-            services.AddInfrastructureServices();
+            services.AddScoped<IHttpUtil, HttpUtil>();
+            services.AddScoped<IApiUtil, ApiUtil>();
 
             services.AddScoped<IWebCategoriesService, WebCategoriesService>();
             services.AddScoped<IWebProductsService, WebProductsService>();
-
-            #endregion
-
-            #region Database configuration
-
-            string connectionString = Configuration.GetConnectionString("DefaultConnection");
-
-            services.AddDbContextPool<ApplicationDbContext>(options =>
-            {
-                options.UseSqlServer(connectionString);
-            });
 
             #endregion
         }
