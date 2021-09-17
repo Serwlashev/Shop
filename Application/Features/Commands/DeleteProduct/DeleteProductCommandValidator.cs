@@ -1,10 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using FluentValidation;
 
 namespace Core.Application.Features.Commands.DeleteProduct
 {
-    class DeleteProductCommandValidator
+    public class DeleteProductCommandValidator : AbstractValidator<DeleteProductCommandRequest>
     {
+        public DeleteProductCommandValidator()
+        {
+            RuleFor(p => p.Id)
+            .NotNull()
+            .WithMessage("Product Id cannot be null")
+            .GreaterThan(0)
+            .WithMessage("Product Id should be greater then zero");
+        }
     }
 }

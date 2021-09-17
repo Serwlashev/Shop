@@ -1,6 +1,7 @@
-using AutoMapper;
 using AutoMapper.Extensions.ExpressionMapping;
+using Core.Application.Features.Commands.CreateCategory;
 using Core.Application.Mapping;
+using FluentValidation.AspNetCore;
 using Infrastructure.Persistence;
 using Infrastructure.Services;
 using MediatR;
@@ -15,6 +16,7 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System;
 using WebAPI.Authentication;
+using WebAPI.Filters;
 using WebAPI.Middleware;
 
 namespace WebAPI
@@ -31,6 +33,14 @@ namespace WebAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddControllers(options => options.Filters.Add<ValidationFilter>())
+                .AddFluentValidation(cnfg =>
+                {
+                    cnfg.RegisterValidatorsFromAssemblyContaining<CreateCategoryCommandValidator>();
+                })
+                .ConfigureApiBehaviorOptions(o => o.SuppressModelStateInvalidFilter = true);
+
+
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(options =>
                 {
@@ -47,7 +57,6 @@ namespace WebAPI
                     };
                 });
 
-            services.AddControllers();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "WebAPI", Version = "v1" });

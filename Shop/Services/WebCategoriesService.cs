@@ -1,5 +1,4 @@
-﻿using AutoMapper;
-using Presentation.Shop.Models;
+﻿using Presentation.Shop.Models;
 using Presentation.Shop.Services.Interfaces;
 using Presentation.Shop.Utils.Interfaces;
 using System.Collections.Generic;

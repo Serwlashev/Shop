@@ -1,10 +1,10 @@
 ﻿using FluentValidation;
 
-namespace Core.Application.Features.Commands.DeleteCategory
+namespace Core.Application.Features.Queries.GetByIdCategory
 {
-    public class DeleteCategoryCommandValidator : AbstractValidator<DeleteCategoryCommandRequest>
+    public class GetByIdQueryValidator : AbstractValidator<GetByIdCategoryQueryRequest>
     {
-        public DeleteCategoryCommandValidator()
+        public GetByIdQueryValidator()
         {
             RuleFor(c => c.Id)
                 .NotNull()
