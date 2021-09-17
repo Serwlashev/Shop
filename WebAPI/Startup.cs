@@ -14,7 +14,6 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System;
-using System.Reflection;
 using WebAPI.Authentication;
 using WebAPI.Middleware;
 
@@ -55,14 +54,6 @@ namespace WebAPI
             });
 
             #region Mapping configuration
-
-            //var mappingConfig = new MapperConfiguration(mc =>
-            //{
-            //    mc.AddExpressionMapping();
-            //    mc.AddProfile(new ModelMappingProfile());
-            //});
-
-            //services.AddSingleton(mappingConfig.CreateMapper());
 
             services.AddAutoMapper(cfg =>
             {

@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using Presentation.Shop.Utils.Interfaces;
+using System;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,7 +13,10 @@ namespace Presentation.Shop.Utils
 
         public HttpUtil()
         {
-            _client = new HttpClient();
+            _client = new HttpClient()
+            {
+                BaseAddress = new Uri("http://localhost:5000/")
+            };
         }
 
         public async Task<HttpResponseMessage> DeleteAsync(string url)
@@ -34,11 +38,23 @@ namespace Presentation.Shop.Utils
             return httpResponse;
         }
 
-        public async Task<HttpResponseMessage> PostAsync<T>(string url, T postData)
+        public async Task<HttpResponseMessage> PostAsync<T>(string url, T data)
         {
             var requestMessage = new HttpRequestMessage(HttpMethod.Post, url)
             {
-                Content = new StringContent(JsonConvert.SerializeObject(postData), Encoding.UTF8)
+                Content = new StringContent(JsonConvert.SerializeObject(data), Encoding.UTF8)
+            };
+
+            var responseMessage = await _client.SendAsync(requestMessage);
+
+            return responseMessage;
+        }
+
+        public async Task<HttpResponseMessage> PutAsync<T>(string url, T data)
+        {
+            var requestMessage = new HttpRequestMessage(HttpMethod.Put, url)
+            {
+                Content = new StringContent(JsonConvert.SerializeObject(data), Encoding.UTF8)
             };
 
             var responseMessage = await _client.SendAsync(requestMessage);

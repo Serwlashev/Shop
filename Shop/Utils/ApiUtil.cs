@@ -2,6 +2,7 @@
 using Presentation.Shop.Utils.Interfaces;
 using System;
 using System.Net;
+using System.Net.Http;
 using System.Threading.Tasks;
 
 namespace Presentation.Shop.Utils
@@ -43,7 +44,9 @@ namespace Presentation.Shop.Utils
         {
             T responseModel = default;
 
-            var httpResponse = await _httpUtil.GetAsync(url);
+            HttpResponseMessage httpResponse = default;
+
+            httpResponse = await _httpUtil.GetAsync(url);
 
             if (httpResponse.StatusCode == HttpStatusCode.OK)
             {
@@ -58,6 +61,18 @@ namespace Presentation.Shop.Utils
         public Task<string> LoginAsync(string url, string email, string password)
         {
             throw new NotImplementedException();
+        }
+
+        public async Task<bool> PutAsync<T>(string url, T entity)
+        {
+            var httpResponse = await _httpUtil.PutAsync(url, entity);
+
+            if (httpResponse.StatusCode == HttpStatusCode.OK)
+            {
+                return true;
+            }
+
+            return false;
         }
     }
 }
