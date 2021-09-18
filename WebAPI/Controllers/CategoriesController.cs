@@ -4,6 +4,7 @@ using Core.Application.Features.Commands.UpdateCategory;
 using Core.Application.Features.Queries.GetAllCategory;
 using Core.Application.Features.Queries.GetByIdCategory;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -22,24 +23,28 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost]
-        public async Task<CreateCategoryCommandResponse> CreateCategory([FromQuery] CreateCategoryCommandRequest request)
+        public async Task<CreateCategoryCommandResponse> CreateCategory([FromBody] CreateCategoryCommandRequest request)
             => await _mediator.Send(request);
-
+        
+        [AllowAnonymous]
         [HttpGet]
+        [ResponseCache(CacheProfileName = "Caching")]
         public async Task<List<GetAllCategoryQueryResponse>> GetAllCategories()
             => await _mediator.Send(new GetAllCategoryQueryRequest());
 
+        [AllowAnonymous]
         [HttpGet("{id}")]
-        public async Task<GetByIdCategoryQueryResponse> GetByIdCategory([FromQuery] GetByIdCategoryQueryRequest request)
+        [ResponseCache(CacheProfileName = "Caching")]
+        public async Task<GetByIdCategoryQueryResponse> GetByIdCategory([FromHeader] GetByIdCategoryQueryRequest request)
             => await _mediator.Send(request);
 
         [HttpPut]
-        public async Task<UpdateCategoryCommandResponse> UpdateCategory([FromQuery] UpdateCategoryCommandRequest request)
+        public async Task<UpdateCategoryCommandResponse> UpdateCategory([FromBody] UpdateCategoryCommandRequest request)
              => await _mediator.Send(request);
 
         [HttpDelete]
         [Route("{id}")]
-        public async Task<DeleteCategoryCommandResponse> DeleteCategory([FromQuery] DeleteCategoryCommandRequest request)
+        public async Task<DeleteCategoryCommandResponse> DeleteCategory([FromHeader] DeleteCategoryCommandRequest request)
              => await _mediator.Send(request);
     }
 }

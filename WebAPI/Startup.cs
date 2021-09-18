@@ -8,11 +8,14 @@ using MediatR;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.Net.Http.Headers;
 using Microsoft.OpenApi.Models;
 using System;
 using WebAPI.Authentication;
@@ -33,13 +36,21 @@ namespace WebAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers(options => options.Filters.Add<ValidationFilter>())
-                .AddFluentValidation(cnfg =>
+            services.AddControllers(options =>
+            {
+                options.CacheProfiles.Add("Caching",
+                        new CacheProfile()
+                        {
+                            Duration = 300,
+                            NoStore = false
+                        });;
+                options.Filters.Add<ValidationFilter>();
+            })
+            .AddFluentValidation(cnfg =>
                 {
                     cnfg.RegisterValidatorsFromAssemblyContaining<CreateCategoryCommandValidator>();
                 })
                 .ConfigureApiBehaviorOptions(o => o.SuppressModelStateInvalidFilter = true);
-
 
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(options =>
@@ -56,6 +67,8 @@ namespace WebAPI
                         ValidateIssuerSigningKey = true
                     };
                 });
+
+            services.AddResponseCaching();
 
             services.AddSwaggerGen(c =>
             {
@@ -109,6 +122,17 @@ namespace WebAPI
             app.UseAuthorization();
 
             app.UseMiddleware<ExceptionHandleMiddleware>();
+
+            app.Use(async (ctx, next) =>
+            {
+                ctx.Request.GetTypedHeaders().CacheControl = new CacheControlHeaderValue()
+                {
+                    Public = true,
+                    MaxAge = TimeSpan.FromSeconds(120)
+                };
+                await next();
+            });
+            app.UseResponseCaching();
 
             app.UseEndpoints(endpoints =>
             {

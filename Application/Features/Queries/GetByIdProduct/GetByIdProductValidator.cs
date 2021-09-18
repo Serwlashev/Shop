@@ -9,7 +9,7 @@ namespace Core.Application.Features.Queries.GetByIdProduct
             RuleFor(p => p.Id)
                 .NotNull()
                 .WithMessage("Product Id cannot be null")
-                .GreaterThan(1)
+                .GreaterThan(0)
                 .WithMessage("Product Id should be greater then zero");
         }
     }
