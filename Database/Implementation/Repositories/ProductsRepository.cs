@@ -1,6 +1,8 @@
 ﻿using Core.Domain.Entity;
+using Domain.Exceptions;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Infrastructure.Persistence.Implementation.Repositories
@@ -13,6 +15,27 @@ namespace Infrastructure.Persistence.Implementation.Repositories
         }
 
         public override async Task<IEnumerable<Product>> GetAllAsync()
-            => await _context.Products.Include(p => p.Category).ToListAsync();
+        {
+            var entities = await _context.Products.Include(p => p.Category).ToListAsync();
+
+            if (!entities.Any())
+            {
+                throw new NotFoundException("Not found");
+            }
+
+            return entities;
+        }
+
+        public override async Task<Product> GetAsync(long id)
+        {
+            var entity = await _context.Products.Include(p => p.Category).FirstAsync(p => p.Id == id);
+
+            if (entity == null)
+            {
+                throw new NotFoundException("Entity not found");
+            }
+
+            return entity;
+        }
     }
 }

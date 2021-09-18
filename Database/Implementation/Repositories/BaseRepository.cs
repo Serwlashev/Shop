@@ -34,7 +34,7 @@ namespace Infrastructure.Persistence.Implementation.Repositories
             return entities;
         }
 
-        public async Task<TValue> GetAsync(TKey id)
+        public virtual async Task<TValue> GetAsync(TKey id)
         {
             var entity = await Table.FindAsync(id);
 

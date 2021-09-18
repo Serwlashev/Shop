@@ -25,7 +25,7 @@ namespace WebAPI.Controllers
         [HttpPost]
         public async Task<CreateProductCommandResponse> CreateProduct([FromBody] CreateProductCommandRequest request)
             => await _mediator.Send(request);
-        
+
         [AllowAnonymous]
         [HttpGet]
         [ResponseCache(CacheProfileName = "Caching")]
