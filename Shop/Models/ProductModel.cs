@@ -1,4 +1,6 @@
-﻿namespace Presentation.Shop.Models
+﻿using Presentation.Shop.Models.Categories;
+
+namespace Presentation.Shop.Models
 {
     public class ProductModel
     {

@@ -1,4 +1,5 @@
 ﻿using Presentation.Shop.Models;
+using Presentation.Shop.Models.Categories;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 

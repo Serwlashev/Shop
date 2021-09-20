@@ -4,18 +4,17 @@ using Presentation.Shop.Services.Interfaces;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Presentation.Shop.Controllers
+namespace Shop.ViewComponents
 {
-    public class CategoriesController : Controller
+    public class SidebarViewComponent : ViewComponent
     {
         private readonly IWebCategoriesService _categoriesService;
 
-        public CategoriesController(IWebCategoriesService categoriesService)
+        public SidebarViewComponent(IWebCategoriesService categoriesService)
         {
             _categoriesService = categoriesService;
         }
-
-        public async Task<IActionResult> GetSidebar()
+        public async Task<IViewComponentResult> InvokeAsync()
         {
             var categories = await _categoriesService.GetAllAsync();
 
@@ -24,7 +23,7 @@ namespace Presentation.Shop.Controllers
                 Categories = categories.ToList()
             };
 
-            return PartialView("_Sidebar", model);
+            return View();
         }
     }
 }

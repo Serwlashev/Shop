@@ -19,7 +19,8 @@ namespace Presentation.Shop.Controllers
         {
             var products = await _productsService.GetAllAsync();
             
-            return View(new ProductIndexModel { 
+            return View(new ProductIndexModel
+            { 
                 Products = products.ToList()
             });
         }
@@ -82,6 +83,16 @@ namespace Presentation.Shop.Controllers
             }
 
             return View(product);
+        }
+
+        public string AddToCart(long? product)
+        {
+            if (product is null)
+            {
+                return "failed";
+            }
+
+            return "success";
         }
     }
 }

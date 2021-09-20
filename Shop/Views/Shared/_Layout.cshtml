@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@using System.Web.Mvc.Html
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -22,10 +24,16 @@
             </nav>
         </div>
     </header>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
+    <div class="body-container">
+        <div class="shop-sidebar">
+            @*@Component.InvokeAsync("Sidebar")*@
+            @await Html.PartialAsync("_Sidebar");
+        </div>
+        <div class="container">
+            <main role="main" class="pb-3 main-body">
+                @RenderBody()
+            </main>
+        </div>
     </div>
 
     <footer class="border-top footer text-muted">
