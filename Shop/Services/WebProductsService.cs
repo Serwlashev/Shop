@@ -29,5 +29,8 @@ namespace Presentation.Shop.Services
 
         public async Task<bool> UpdateAsync(ProductModel entity)
             => await _apiUtil.PostAsync("api/products", entity);
+
+        public async Task<IEnumerable<ProductModel>> FindProductsAsync(string searchText)
+            => await _apiUtil.GetAsync<IEnumerable<ProductModel>>($"api/products/find/{searchText}");
     }
 }

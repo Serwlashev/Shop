@@ -7,6 +7,7 @@ using Core.Application.Features.Queries.GetByIdCategory;
 using Core.Application.Features.Queries.GetAllCategory;
 using System;
 using System.Linq.Expressions;
+using Core.Application.Features.Queries.FindProducts;
 
 namespace Core.Application.Mapping
 {
@@ -23,12 +24,11 @@ namespace Core.Application.Mapping
             CreateMap<User, UserDTO>()
                 .ReverseMap();
 
-            //CreateMap<Expression<Func<UserDTO, bool>>, Expression<Func<User, bool>>>()
-            //    .DisableCtorValidation();
-
             CreateMap<ProductDTO, GetAllProductQueryResponse>();
 
             CreateMap<ProductDTO, GetByIdProductQueryResponse>();
+            
+            CreateMap<ProductDTO, FindProductsQueryResponse>();
 
             CreateMap<CategoryDTO, GetAllCategoryQueryResponse>();
 

@@ -60,5 +60,12 @@ namespace Infrastructure.Services.Impementation
         {
             throw new NotImplementedException();
         }
+
+        public async Task<IEnumerable<ProductDTO>> FindProductsAsync(string searchText)
+        {
+            var products = await _uow.ProductsRepository.FindProductsAsync(searchText);
+
+            return _mapper.Map<IEnumerable<ProductDTO>>(products);
+        }
     }
 }

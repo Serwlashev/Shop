@@ -94,5 +94,20 @@ namespace Presentation.Shop.Controllers
 
             return "success";
         }
+
+        public async Task<IActionResult> FindProducts(string searchText)
+        {
+            var products = await _productsService.FindProductsAsync(searchText);
+
+            if(products != null && products.Count() > 0)
+            {
+                return View("Index", new ProductIndexModel
+                {
+                    Products = products.ToList()
+                });
+            }
+
+            return RedirectToAction("Index");
+        }
     }
 }

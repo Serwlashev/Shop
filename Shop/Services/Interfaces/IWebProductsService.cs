@@ -8,6 +8,7 @@ namespace Presentation.Shop.Services.Interfaces
     {
         Task<IEnumerable<ProductModel>> GetAllAsync();
         Task<ProductModel> GetAsync(long id);
+        Task<IEnumerable<ProductModel>> FindProductsAsync(string searchText);
         Task<bool> UpdateAsync(ProductModel entity);
         Task<bool> CreateAsync(ProductModel entity);
         Task<bool> RemoveAsync(long id);

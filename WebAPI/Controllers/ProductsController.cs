@@ -1,6 +1,7 @@
 ﻿using Core.Application.Features.Commands.CreateProduct;
 using Core.Application.Features.Commands.DeleteProduct;
 using Core.Application.Features.Commands.UpdateProduct;
+using Core.Application.Features.Queries.FindProducts;
 using Core.Application.Features.Queries.GetAllProduct;
 using Core.Application.Features.Queries.GetByIdProduct;
 using MediatR;
@@ -36,6 +37,12 @@ namespace WebAPI.Controllers
         [HttpGet("{id}")]
         [ResponseCache(CacheProfileName = "Caching")]
         public async Task<GetByIdProductQueryResponse> GetByIdProduct([FromHeader] GetByIdProductQueryRequest request)
+             => await _mediator.Send(request);
+
+        [AllowAnonymous]
+        [HttpGet("find/{searchText}")]
+        [ResponseCache(CacheProfileName = "Caching")]
+        public async Task<List<FindProductsQueryResponse>> FindProducts([FromHeader] FindProductsQueryRequest request)
              => await _mediator.Send(request);
 
         [HttpPut]

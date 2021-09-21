@@ -8,15 +8,15 @@ namespace Infrastructure.Persistence.Implementation
     public class UnitOfWork : IUnitOfWork
     {
         private readonly ApplicationDbContext _applicationContext;
-        private IRepository<long, Category> _categoriesRepository;
-        private IRepository<long, Product> _productsRepository;
-        private IRepository<long, User> _accountsRepository;
+        private ICategoriesRepository<long, Category> _categoriesRepository;
+        private IProductsRepository<long, Product> _productsRepository;
+        private IAccountsRepository<long, User> _accountsRepository;
 
-        public IRepository<long, Product> ProductsRepository
+        public IProductsRepository<long, Product> ProductsRepository
             => _productsRepository ??= new ProductsRepository(_applicationContext);
-        public IRepository<long, Category> CategoriesRepository
+        public ICategoriesRepository<long, Category> CategoriesRepository
             => _categoriesRepository ??= new CategoriesRepository(_applicationContext);
-        public IRepository<long, User> AccountsRepository
+        public IAccountsRepository<long, User> AccountsRepository
             => _accountsRepository ??= new AccountsRepository(_applicationContext);
 
         public UnitOfWork(ApplicationDbContext context)

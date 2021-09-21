@@ -1,10 +1,11 @@
 ﻿using Core.Domain.Entity;
+using Core.Domain.Interfaces.Repository;
 using Domain.Exceptions;
 using System.Linq;
 
 namespace Infrastructure.Persistence.Implementation.Repositories
 {
-    public class CategoriesRepository : BaseRepository<long, Category>
+    public class CategoriesRepository : BaseRepository<long, Category>, ICategoriesRepository<long, Category>
     {
         public CategoriesRepository(ApplicationDbContext context)
             : base(context)
