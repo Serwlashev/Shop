@@ -9,5 +9,8 @@ namespace Core.Application.Features.Commands.UpdateProduct
         public double Price { get; set; }
         public long CategoryId { get; set; }
         public int Number { get; set; }
+        public string ShortDescription { get; set; }
+        public string FullDescription { get; set; }
+        public string PathToImage { get; set; }
     }
 }

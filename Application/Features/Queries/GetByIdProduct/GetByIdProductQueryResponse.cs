@@ -9,6 +9,9 @@ namespace Core.Application.Features.Queries.GetByIdProduct
         public double Price { get; set; }
         public int Number { get; set; }
         public GetByIdCategoryQueryResponse Category { get; set; }
+        public string ShortDescription { get; set; }
+        public string FullDescription { get; set; }
+        public string PathToImage { get; set; }
 
     }
 }

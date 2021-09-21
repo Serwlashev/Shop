@@ -6,12 +6,14 @@
 <div class="card product-detail">
     <div class="detail-image">
         <a href="@Url.Action("Detail", "Products", new { id = Model.Id } )">
-            <img src="https://www.prameyanews.com/wp-content/uploads/2019/12/packaged-food.jpg" class="card-img-top product-image" alt="...">
+
+            <img src="@Model.PathToImage" class="card-img-top product-image" alt="https://www.prameyanews.com/wp-content/uploads/2019/12/packaged-food.jpg">
         </a>
     </div>
     <div class="card-body">
         <h5 class="card-title">@Model.Name</h5>
         <div class="card-text">
+            <p>@Model.FullDescription</p>
             <p>Category: @Model?.Category?.Name</p>
             <p>Price: @Model.Price UAH</p>
             <div style="display:flex; flex-direction: row;">

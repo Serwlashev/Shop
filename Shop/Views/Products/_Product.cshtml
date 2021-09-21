@@ -2,12 +2,15 @@
 @model ProductModel
 
 <div class="card product-item">
-    <a href="@Url.Action("Detail", "Products", new { id = Model.Id } )">
-        <img src="https://www.prameyanews.com/wp-content/uploads/2019/12/packaged-food.jpg" class="card-img-top" alt="...">
+    <div class="card-image">
+        <a href="@Url.Action("Detail", "Products", new { id = Model.Id })">
+            <img src="@Model.PathToImage" class="card-img-top" alt="https://www.prameyanews.com/wp-content/uploads/2019/12/packaged-food.jpg">
         </a>
+    </div>
         <div class="card-body">
             <h5 class="card-title">@Model.Name</h5>
             <div class="card-text">
+                <p>@Model.ShortDescription</p>
                 <p>Category: @Model?.Category?.Name</p>
                 <p>Price: @Model.Price UAH</p>
                 <div style="display:flex; flex-direction: row;">
