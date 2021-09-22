@@ -10,16 +10,19 @@ namespace Infrastructure.Services.Impementation
         private readonly Lazy<IProductService> _productService;
         private readonly Lazy<ICategoryService> _categoryService;
         private readonly Lazy<IAccountsService> _accountsService;
+        private readonly Lazy<ICartService> _cartService;
 
         public ServiceManager(IUnitOfWork uow, IMapper mapper)
         {
             _productService = new Lazy<IProductService>(() => new ProductService(uow, mapper));
             _categoryService = new Lazy<ICategoryService>(() => new CategoryService(uow, mapper));
             _accountsService = new Lazy<IAccountsService>(() => new AccountsService(uow, mapper));
+            _cartService = new Lazy<ICartService>(() => new CartService(uow, mapper));
         }
 
         public IProductService ProductService => _productService.Value;
         public ICategoryService CategoryService => _categoryService.Value;
         public IAccountsService AccountsService => _accountsService.Value;
+        public ICartService CartService => _cartService.Value;
     }
 }

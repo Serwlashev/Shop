@@ -11,6 +11,7 @@ namespace Infrastructure.Persistence.Implementation
         private ICategoriesRepository<long, Category> _categoriesRepository;
         private IProductsRepository<long, Product> _productsRepository;
         private IAccountsRepository<long, User> _accountsRepository;
+        private ICartRepository<long, CartItem> _cartRepository;
 
         public IProductsRepository<long, Product> ProductsRepository
             => _productsRepository ??= new ProductsRepository(_applicationContext);
@@ -18,6 +19,9 @@ namespace Infrastructure.Persistence.Implementation
             => _categoriesRepository ??= new CategoriesRepository(_applicationContext);
         public IAccountsRepository<long, User> AccountsRepository
             => _accountsRepository ??= new AccountsRepository(_applicationContext);
+
+        public ICartRepository<long, CartItem> CartRepository
+            => _cartRepository ??= new CartRepository(_applicationContext);
 
         public UnitOfWork(ApplicationDbContext context)
         {

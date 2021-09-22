@@ -5,8 +5,6 @@ using Core.Application.Features.Queries.GetAllProduct;
 using Core.Application.Features.Queries.GetByIdProduct;
 using Core.Application.Features.Queries.GetByIdCategory;
 using Core.Application.Features.Queries.GetAllCategory;
-using System;
-using System.Linq.Expressions;
 using Core.Application.Features.Queries.FindProducts;
 
 namespace Core.Application.Mapping
@@ -22,6 +20,9 @@ namespace Core.Application.Mapping
                 .ReverseMap();
 
             CreateMap<User, UserDTO>()
+                .ReverseMap();
+
+            CreateMap<CartItem, CartItemDTO>()
                 .ReverseMap();
 
             CreateMap<ProductDTO, GetAllProductQueryResponse>();

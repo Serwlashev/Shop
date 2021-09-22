@@ -8,6 +8,7 @@ namespace Core.Domain.Interfaces.Repository
         IProductsRepository<long, Product> ProductsRepository { get; }
         ICategoriesRepository<long, Category> CategoriesRepository { get; }
         IAccountsRepository<long, User> AccountsRepository { get; }
+        ICartRepository<long, CartItem> CartRepository { get; }
         Task SaveChangesAsync();
     }
 }
