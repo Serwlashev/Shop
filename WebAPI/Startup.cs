@@ -20,6 +20,7 @@ using Microsoft.OpenApi.Models;
 using System;
 using WebAPI.Authentication;
 using WebAPI.Filters;
+using WebAPI.Hubs;
 using WebAPI.Middleware;
 
 namespace WebAPI
@@ -104,6 +105,8 @@ namespace WebAPI
             #endregion
 
             services.AddMediatR(AppDomain.CurrentDomain.GetAssemblies());
+
+            services.AddSignalR();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -136,8 +139,10 @@ namespace WebAPI
 
             app.UseEndpoints(endpoints =>
             {
+                endpoints.MapHub<CartHub>("/cartHub");
                 endpoints.MapControllers();
             });
+
         }
     }
 }

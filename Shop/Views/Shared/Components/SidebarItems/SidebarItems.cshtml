@@ -1,0 +1,17 @@
+﻿@using Presentation.Shop.Models.Categories
+@model CategorySidebarModel
+
+<ul class="nav nav-pills flex-column mb-auto">
+    @if (Model?.Categories.Count > 0)
+    {
+        @foreach (var category in Model.Categories)
+        {
+            <li>
+                <a href="@Url.Action("FindProducts", "Products", new { searchText = category.Name })" class="nav-link link-dark">
+                    <svg class="bi me-2" width="16" height="16"><use xlink:href="#speedometer2"></use></svg>
+                    @category.Name
+                </a>
+            </li>
+        }
+    }
+</ul>

@@ -6,11 +6,12 @@ using System.Threading.Tasks;
 
 namespace Shop.ViewComponents
 {
-    public class SidebarViewComponent : ViewComponent
+    [ViewComponent(Name = "SidebarItems")]
+    public class SidebarItemsComponent : ViewComponent
     {
         private readonly IWebCategoriesService _categoriesService;
 
-        public SidebarViewComponent(IWebCategoriesService categoriesService)
+        public SidebarItemsComponent(IWebCategoriesService categoriesService)
         {
             _categoriesService = categoriesService;
         }
@@ -23,7 +24,7 @@ namespace Shop.ViewComponents
                 Categories = categories.ToList()
             };
 
-            return View();
+            return View("SidebarItems", model);
         }
     }
 }

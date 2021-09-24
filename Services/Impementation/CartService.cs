@@ -36,8 +36,12 @@ namespace Infrastructure.Services.Impementation
             return _mapper.Map<CartItemDTO>(cartItem);
         }
 
-        public override Task<IEnumerable<CartItemDTO>> GetByConditionAsync(Expression<Func<CartItemDTO, bool>> predicate)
-            => throw new NotImplementedException();
+        public async override Task<IEnumerable<CartItemDTO>> GetByConditionAsync(Expression<Func<CartItemDTO, bool>> predicate)
+        {
+            var users = await _uow.CartRepository.GetByConditionAsync(_mapper.Map<Expression<Func<CartItem, bool>>>(predicate));
+
+            return _mapper.Map<IEnumerable<CartItemDTO>>(users);
+        }
 
         public async override Task<bool> RemoveAsync(long id)
         {
