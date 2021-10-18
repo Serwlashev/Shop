@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using System;
 using System.Linq.Expressions;
+using System.Threading;
 
 namespace Infrastructure.Services.Impementation
 {
@@ -19,11 +20,11 @@ namespace Infrastructure.Services.Impementation
             _mapper = mapper;
         }
 
-        public abstract Task<bool> CreateAsync(TValue entity);
-        public abstract Task<TValue> GetAsync(TKey id);
-        public abstract Task<IEnumerable<TValue>> GetAllAsync();
-        public abstract Task<bool> RemoveAsync(TKey id);
-        public abstract Task<bool> UpdateAsync(TValue entity);
-        public abstract Task<IEnumerable<TValue>> GetByConditionAsync(Expression<Func<TValue, bool>> predicate);
+        public abstract Task<bool> CreateAsync(TValue entity, CancellationToken token = default);
+        public abstract Task<TValue> GetAsync(TKey id, CancellationToken token = default);
+        public abstract Task<IEnumerable<TValue>> GetAllAsync(CancellationToken token = default);
+        public abstract Task<bool> RemoveAsync(TKey id, CancellationToken token = default);
+        public abstract Task<bool> UpdateAsync(TValue entity, CancellationToken token = default);
+        public abstract Task<IEnumerable<TValue>> GetByConditionAsync(Expression<Func<TValue, bool>> predicate, CancellationToken token = default);
     }
 }

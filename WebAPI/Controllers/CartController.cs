@@ -1,7 +1,7 @@
-﻿using Core.Application.Features.Commands.AddToCart;
-using Core.Application.Features.Commands.DeleteCart;
-using Core.Application.Features.Commands.UpdateCart;
-using Core.Application.Features.Queries.GetByClientCart;
+﻿using WebAPI.Features.Commands.AddToCart;
+using WebAPI.Features.Commands.DeleteCart;
+using WebAPI.Features.Commands.UpdateCart;
+using WebAPI.Features.Queries.GetByClientCart;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SignalR;

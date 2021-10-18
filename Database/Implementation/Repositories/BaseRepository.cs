@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Infrastructure.Persistence.Implementation.Repositories
@@ -22,9 +23,9 @@ namespace Infrastructure.Persistence.Implementation.Repositories
             _context = context;
         }
 
-        public virtual async Task<IEnumerable<TValue>> GetAllAsync()
+        public virtual async Task<IEnumerable<TValue>> GetAllAsync(CancellationToken token = default)
         {
-            var entities = await Table.ToListAsync();
+            var entities = await Table.ToListAsync(token).ConfigureAwait(false);
 
             if(!entities.Any())
             {
@@ -34,9 +35,9 @@ namespace Infrastructure.Persistence.Implementation.Repositories
             return entities;
         }
 
-        public virtual async Task<TValue> GetAsync(TKey id)
+        public virtual async Task<TValue> GetAsync(TKey id, CancellationToken token = default)
         {
-            var entity = await Table.FindAsync(id);
+            var entity = await Table.FindAsync(id, token).ConfigureAwait(false);
 
             if(entity == null)
             {
@@ -69,9 +70,9 @@ namespace Infrastructure.Persistence.Implementation.Repositories
             Table.Update(entity);
         }
 
-        public async Task<IEnumerable<TValue>> GetByConditionAsync(Expression<Func<TValue, bool>> predicate)
+        public async Task<IEnumerable<TValue>> GetByConditionAsync(Expression<Func<TValue, bool>> predicate, CancellationToken token = default)
         {
-            return await Table.Where(predicate).AsQueryable().ToListAsync();
+            return await Table.Where(predicate).AsQueryable().ToListAsync(token);
         }
     }
 }

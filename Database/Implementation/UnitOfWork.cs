@@ -1,6 +1,7 @@
 ﻿using Core.Domain.Entity;
 using Core.Domain.Interfaces.Repository;
 using Infrastructure.Persistence.Implementation.Repositories;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Infrastructure.Persistence.Implementation
@@ -28,7 +29,7 @@ namespace Infrastructure.Persistence.Implementation
             _applicationContext = context;
         }
 
-        public async Task SaveChangesAsync()
-            => await _applicationContext.SaveChangesAsync();
+        public async Task SaveChangesAsync(CancellationToken token = default)
+            => await _applicationContext.SaveChangesAsync(token).ConfigureAwait(false);
     }
 }

@@ -1,8 +1,8 @@
-﻿using Core.Application.Features.Commands.CreateCategory;
-using Core.Application.Features.Commands.DeleteCategory;
-using Core.Application.Features.Commands.UpdateCategory;
-using Core.Application.Features.Queries.GetAllCategory;
-using Core.Application.Features.Queries.GetByIdCategory;
+﻿using WebAPI.Features.Commands.CreateCategory;
+using WebAPI.Features.Commands.DeleteCategory;
+using WebAPI.Features.Commands.UpdateCategory;
+using WebAPI.Features.Queries.GetAllCategory;
+using WebAPI.Features.Queries.GetByIdCategory;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;

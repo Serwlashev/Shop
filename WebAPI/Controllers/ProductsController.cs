@@ -1,9 +1,9 @@
-﻿using Core.Application.Features.Commands.CreateProduct;
-using Core.Application.Features.Commands.DeleteProduct;
-using Core.Application.Features.Commands.UpdateProduct;
-using Core.Application.Features.Queries.FindProducts;
-using Core.Application.Features.Queries.GetAllProduct;
-using Core.Application.Features.Queries.GetByIdProduct;
+﻿using WebAPI.Features.Commands.CreateProduct;
+using WebAPI.Features.Commands.DeleteProduct;
+using WebAPI.Features.Commands.UpdateProduct;
+using WebAPI.Features.Queries.FindProducts;
+using WebAPI.Features.Queries.GetAllProduct;
+using WebAPI.Features.Queries.GetByIdProduct;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;

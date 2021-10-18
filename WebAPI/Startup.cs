@@ -1,5 +1,5 @@
 using AutoMapper.Extensions.ExpressionMapping;
-using Core.Application.Features.Commands.CreateCategory;
+using WebAPI.Features.Commands.CreateCategory;
 using Core.Application.Mapping;
 using FluentValidation.AspNetCore;
 using Infrastructure.Persistence;
@@ -22,6 +22,7 @@ using WebAPI.Authentication;
 using WebAPI.Filters;
 using WebAPI.Hubs;
 using WebAPI.Middleware;
+using WebAPI.Mapping;
 
 namespace WebAPI
 {
@@ -82,7 +83,8 @@ namespace WebAPI
             {
                 cfg.DisableConstructorMapping();
                 cfg.AddExpressionMapping();
-            }, typeof(ModelMappingProfile));
+            }, typeof(MappingProfile),
+            typeof(ModelMappingProfile));
 
             #endregion
 

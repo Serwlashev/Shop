@@ -1,5 +1,6 @@
 ﻿using Core.Domain.Entity;
 using System.Collections.Generic;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Core.Domain.Interfaces.Repository
@@ -8,6 +9,6 @@ namespace Core.Domain.Interfaces.Repository
         where TKey : struct
         where TValue : BaseEntity<TKey>
     {
-        Task<IEnumerable<TValue>> FindProductsAsync(string searchText);
+        Task<IEnumerable<TValue>> FindProductsAsync(string searchText, CancellationToken token = default);
     }
 }
