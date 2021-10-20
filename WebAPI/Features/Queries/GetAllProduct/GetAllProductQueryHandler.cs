@@ -20,9 +20,9 @@ namespace WebAPI.Features.Queries.GetAllProduct
             _mapper = mapper;
         }
 
-        public async Task<List<GetAllProductQueryResponse>> Handle(GetAllProductQueryRequest request, CancellationToken cancellationToken)
+        public async Task<List<GetAllProductQueryResponse>> Handle(GetAllProductQueryRequest request, CancellationToken token = default)
         {
-            var products = await _serviceManager.ProductService.GetAllAsync();
+            var products = await _serviceManager.ProductService.GetAllAsync(token);
 
             return _mapper.Map<List<GetAllProductQueryResponse>>(products);
         }

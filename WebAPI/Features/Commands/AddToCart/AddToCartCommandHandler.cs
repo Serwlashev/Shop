@@ -15,7 +15,7 @@ namespace WebAPI.Features.Commands.AddToCart
             _serviceManager = serviceManager;
         }
 
-        public async Task<AddToCartCommandResponse> Handle(AddToCartCommandRequest request, CancellationToken cancellationToken)
+        public async Task<AddToCartCommandResponse> Handle(AddToCartCommandRequest request, CancellationToken token = default)
         {
             CartItemDTO cartItem = new CartItemDTO
             {
@@ -25,7 +25,7 @@ namespace WebAPI.Features.Commands.AddToCart
                 UserId = request.UserId
             };
 
-            bool result = await _serviceManager.CartService.CreateAsync(cartItem);
+            bool result = await _serviceManager.CartService.CreateAsync(cartItem, token);
 
             return new AddToCartCommandResponse
             {

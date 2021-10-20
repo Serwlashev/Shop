@@ -15,9 +15,9 @@ namespace WebAPI.Features.Commands.Login
             _serviceManager = serviceManager;
         }
 
-        public async Task<LoginCommandResponse> Handle(LoginCommandRequest request, CancellationToken cancellationToken)
+        public async Task<LoginCommandResponse> Handle(LoginCommandRequest request, CancellationToken token = default)
         {
-            var accounts = await _serviceManager.AccountsService.GetByConditionAsync(user => user.Email == request.Email && user.Password == request.Password);
+            var accounts = await _serviceManager.AccountsService.GetByConditionAsync(user => user.Email == request.Email && user.Password == request.Password, token);
 
             var succeed = accounts.Count() == 1;
             return new LoginCommandResponse

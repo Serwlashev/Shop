@@ -2,6 +2,7 @@
 using Presentation.Shop.Models;
 using Presentation.Shop.Services.Interfaces;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Presentation.Shop.Controllers
@@ -15,9 +16,9 @@ namespace Presentation.Shop.Controllers
             _productsService = productsService;
         }
 
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(CancellationToken token)
         {
-            var products = await _productsService.GetAllAsync();
+            var products = await _productsService.GetAllAsync(token);
             
             return View(new ProductIndexModel
             { 
@@ -31,41 +32,41 @@ namespace Presentation.Shop.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(ProductModel product)
+        public async Task<IActionResult> Create(ProductModel product, CancellationToken token)
         {
-            await _productsService.CreateAsync(product);
+            await _productsService.CreateAsync(product, token);
 
             return RedirectToAction("Index");
         }
 
-        public async Task<IActionResult> Delete(long? id)
+        public async Task<IActionResult> Delete(long? id, CancellationToken token)
         {
             if (!id.HasValue)
             {
                 return BadRequest("Product was not found");
             }
 
-            await _productsService.RemoveAsync(id.Value);
+            await _productsService.RemoveAsync(id.Value, token);
 
             return RedirectToAction("Index");
         }
 
-        public async Task<IActionResult> Update(long? id)
+        public async Task<IActionResult> Update(long? id, CancellationToken token)
         {
-            var prodcut = await _productsService.GetAsync(id.Value);
+            var product = await _productsService.GetAsync(id.Value, token);
 
-            if (!id.HasValue || prodcut is null)
+            if (!id.HasValue || product is null)
             {
                 return BadRequest("Product not found");
             }
 
-            return View(prodcut);
+            return View(product);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Update(ProductModel product)
+        public async Task<IActionResult> Update(ProductModel product, CancellationToken token)
         {
-            if(!(await _productsService.UpdateAsync(product)))
+            if(!(await _productsService.UpdateAsync(product, token)))
             {
                 return BadRequest("Product was not found");
             }
@@ -73,9 +74,9 @@ namespace Presentation.Shop.Controllers
             return RedirectToAction($"Detail", new { id = product.Id });
         }
 
-        public async Task<IActionResult> Detail(long? id)
+        public async Task<IActionResult> Detail(long? id, CancellationToken token)
         {
-            var product = await _productsService.GetAsync(id.Value);
+            var product = await _productsService.GetAsync(id.Value, token);
             
             if (product is null)
             {
@@ -85,19 +86,9 @@ namespace Presentation.Shop.Controllers
             return View(product);
         }
 
-        public string AddToCart(long? product)
+        public async Task<IActionResult> FindProducts(string searchText, CancellationToken token)
         {
-            if (product is null)
-            {
-                return "failed";
-            }
-
-            return "success";
-        }
-
-        public async Task<IActionResult> FindProducts(string searchText)
-        {
-            var products = await _productsService.FindProductsAsync(searchText);
+            var products = await _productsService.FindProductsAsync(searchText, token);
 
             if(products != null && products.Count() > 0)
             {

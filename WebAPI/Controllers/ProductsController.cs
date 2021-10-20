@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using System.Threading;
 
 namespace WebAPI.Controllers
 {
@@ -24,34 +25,34 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost]
-        public async Task<CreateProductCommandResponse> CreateProduct([FromBody] CreateProductCommandRequest request)
-            => await _mediator.Send(request);
+        public async Task<CreateProductCommandResponse> CreateProduct([FromBody] CreateProductCommandRequest request, CancellationToken token)
+            => await _mediator.Send(request, token);
 
         [AllowAnonymous]
         [HttpGet]
         [ResponseCache(CacheProfileName = "Caching")]
-        public async Task<List<GetAllProductQueryResponse>> GetAllProducts()
-            =>  await _mediator.Send(new GetAllProductQueryRequest());
+        public async Task<List<GetAllProductQueryResponse>> GetAllProducts(CancellationToken token)
+            =>  await _mediator.Send(new GetAllProductQueryRequest(), token);
 
         [AllowAnonymous]
         [HttpGet("{id}")]
         [ResponseCache(CacheProfileName = "Caching")]
-        public async Task<GetByIdProductQueryResponse> GetByIdProduct([FromHeader] GetByIdProductQueryRequest request)
-             => await _mediator.Send(request);
+        public async Task<GetByIdProductQueryResponse> GetByIdProduct([FromHeader] GetByIdProductQueryRequest request, CancellationToken token)
+             => await _mediator.Send(request, token);
 
         [AllowAnonymous]
         [HttpGet("find/{searchText}")]
         [ResponseCache(CacheProfileName = "Caching")]
-        public async Task<List<FindProductsQueryResponse>> FindProducts([FromHeader] FindProductsQueryRequest request)
-             => await _mediator.Send(request);
+        public async Task<List<FindProductsQueryResponse>> FindProducts([FromHeader] FindProductsQueryRequest request, CancellationToken token)
+             => await _mediator.Send(request, token);
 
         [HttpPut]
-        public async Task<UpdateProductCommandResponse> UpdateProduct([FromBody] UpdateProductCommandRequest request)
-             => await _mediator.Send(request);
+        public async Task<UpdateProductCommandResponse> UpdateProduct([FromBody] UpdateProductCommandRequest request, CancellationToken token)
+             => await _mediator.Send(request, token);
 
         [HttpDelete]
         [Route("{id}")]
-        public async Task<DeleteProductCommandResponse> DeleteProduct([FromHeader] DeleteProductCommandRequest request)
-             => await _mediator.Send(request);
+        public async Task<DeleteProductCommandResponse> DeleteProduct([FromHeader] DeleteProductCommandRequest request, CancellationToken token)
+             => await _mediator.Send(request, token);
     }
 }

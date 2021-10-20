@@ -2,6 +2,7 @@
 using Presentation.Shop.Models.Categories;
 using Presentation.Shop.Services.Interfaces;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Presentation.Shop.Controllers
@@ -15,9 +16,9 @@ namespace Presentation.Shop.Controllers
             _categoriesService = categoriesService;
         }
 
-        public async Task<IActionResult> GetSidebar()
+        public async Task<IActionResult> GetSidebar(CancellationToken token)
         {
-            var categories = await _categoriesService.GetAllAsync();
+            var categories = await _categoriesService.GetAllAsync(token);
 
             CategorySidebarModel model = new CategorySidebarModel()
             {

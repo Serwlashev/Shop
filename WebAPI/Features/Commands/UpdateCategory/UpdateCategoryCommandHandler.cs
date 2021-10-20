@@ -15,7 +15,7 @@ namespace WebAPI.Features.Commands.UpdateCategory
             _serviceManager = serviceManager;
         }
 
-        public async Task<UpdateCategoryCommandResponse> Handle(UpdateCategoryCommandRequest request, CancellationToken cancellationToken)
+        public async Task<UpdateCategoryCommandResponse> Handle(UpdateCategoryCommandRequest request, CancellationToken token = default)
         {
             CategoryDTO category = new CategoryDTO
             {
@@ -23,7 +23,7 @@ namespace WebAPI.Features.Commands.UpdateCategory
                 Name = request.Name
             };
 
-            bool result = await _serviceManager.CategoryService.UpdateAsync(category);
+            bool result = await _serviceManager.CategoryService.UpdateAsync(category, token);
 
             return new UpdateCategoryCommandResponse
             {

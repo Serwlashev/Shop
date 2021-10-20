@@ -15,14 +15,14 @@ namespace WebAPI.Features.Commands.CreateCategory
             _serviceManager = serviceManager;
         }
 
-        public async Task<CreateCategoryCommandResponse> Handle(CreateCategoryCommandRequest request, CancellationToken cancellationToken)
+        public async Task<CreateCategoryCommandResponse> Handle(CreateCategoryCommandRequest request, CancellationToken token = default)
         {
             CategoryDTO category = new CategoryDTO
             {
                 Name = request.Name
             };
 
-            bool result = await _serviceManager.CategoryService.CreateAsync(category);
+            bool result = await _serviceManager.CategoryService.CreateAsync(category, token);
 
             return new CreateCategoryCommandResponse
             {

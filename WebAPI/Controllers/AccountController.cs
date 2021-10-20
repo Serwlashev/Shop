@@ -2,6 +2,7 @@
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
+using System.Threading;
 
 namespace WebAPI.Controllers
 {
@@ -14,9 +15,9 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("/token")]
-        public async Task<LoginCommandResponse> LoginAsync([FromQuery] LoginCommandRequest request)
+        public async Task<LoginCommandResponse> LoginAsync([FromQuery] LoginCommandRequest request, CancellationToken token)
         {
-            return await _mediator.Send(request);
+            return await _mediator.Send(request, token);
         }
     }
 }

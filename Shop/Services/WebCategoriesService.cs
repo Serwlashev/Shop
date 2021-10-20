@@ -2,6 +2,7 @@
 using Presentation.Shop.Services.Interfaces;
 using Presentation.Shop.Utils.Interfaces;
 using System.Collections.Generic;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Presentation.Shop.Services
@@ -15,19 +16,19 @@ namespace Presentation.Shop.Services
             _apiUtil = apiUtil;
         }
 
-        public async Task<bool> CreateAsync(CategoryModel entity)
+        public async Task<bool> CreateAsync(CategoryModel entity, CancellationToken token = default)
             => await _apiUtil.PostAsync("api/categories", entity);
 
-        public async Task<CategoryModel> GetAsync(long id)
+        public async Task<CategoryModel> GetAsync(long id, CancellationToken token = default)
             => await _apiUtil.GetAsync<CategoryModel>($"api/categories/{id}");
 
-        public async Task<IEnumerable<CategoryModel>> GetAllAsync()
+        public async Task<IEnumerable<CategoryModel>> GetAllAsync(CancellationToken token = default)
             => await _apiUtil.GetAsync<IEnumerable<CategoryModel>>("api/categories");
 
-        public async Task<bool> RemoveAsync(long id)
+        public async Task<bool> RemoveAsync(long id, CancellationToken token = default)
             => await _apiUtil.DeleteAsync($"api/categories/{id}");
 
-        public async Task<bool> UpdateAsync(CategoryModel entity)
+        public async Task<bool> UpdateAsync(CategoryModel entity, CancellationToken token = default)
             => await _apiUtil.PostAsync("api/categories", entity);
     }
 }

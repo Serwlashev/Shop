@@ -14,9 +14,9 @@ namespace WebAPI.Features.Commands.Logout
             _serviceManager = serviceManager;
         }
 
-        public async Task<LogoutCommandResponse> Handle(LogoutCommandRequest request, CancellationToken cancellationToken)
+        public async Task<LogoutCommandResponse> Handle(LogoutCommandRequest request, CancellationToken token = default)
         {
-            bool result = await _serviceManager.ProductService.RemoveAsync(request.Id);
+            bool result = await _serviceManager.ProductService.RemoveAsync(request.Id, token);
 
             return new LogoutCommandResponse
             {

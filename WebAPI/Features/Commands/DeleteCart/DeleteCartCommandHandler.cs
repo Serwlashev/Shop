@@ -14,9 +14,9 @@ namespace WebAPI.Features.Commands.DeleteCart
             _serviceManager = serviceManager;
         }
 
-        public async Task<DeleteCartCommandResponse> Handle(DeleteCartCommandRequest request, CancellationToken cancellationToken)
+        public async Task<DeleteCartCommandResponse> Handle(DeleteCartCommandRequest request, CancellationToken token = default)
         {
-            bool result = await _serviceManager.CartService.RemoveAsync(request.Id);
+            bool result = await _serviceManager.CartService.RemoveAsync(request.Id, token);
 
             return new DeleteCartCommandResponse
             {

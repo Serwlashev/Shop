@@ -15,7 +15,7 @@ namespace WebAPI.Features.Commands.UpdateCart
             _serviceManager = serviceManager;
         }
 
-        public async Task<UpdateCartCommandResponse> Handle(UpdateCartCommandRequest request, CancellationToken cancellationToken)
+        public async Task<UpdateCartCommandResponse> Handle(UpdateCartCommandRequest request, CancellationToken token = default)
         {
             CartItemDTO cartItem = new CartItemDTO
             {
@@ -26,7 +26,7 @@ namespace WebAPI.Features.Commands.UpdateCart
                 UserId = request.UserId
             };
 
-            bool result = await _serviceManager.CartService.UpdateAsync(cartItem);
+            bool result = await _serviceManager.CartService.UpdateAsync(cartItem, token);
 
             return new UpdateCartCommandResponse
             {

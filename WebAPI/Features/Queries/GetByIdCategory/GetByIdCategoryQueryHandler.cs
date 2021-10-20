@@ -16,9 +16,9 @@ namespace WebAPI.Features.Queries.GetByIdCategory
             _serviceManager = serviceManager;
             _mapper = mapper;
         }
-        public async Task<GetByIdCategoryQueryResponse> Handle(GetByIdCategoryQueryRequest request, CancellationToken cancellationToken)
+        public async Task<GetByIdCategoryQueryResponse> Handle(GetByIdCategoryQueryRequest request, CancellationToken token = default)
         {
-            var product = await _serviceManager.CategoryService.GetAsync(request.Id);
+            var product = await _serviceManager.CategoryService.GetAsync(request.Id, token);
 
             return _mapper.Map<GetByIdCategoryQueryResponse>(product);
         }

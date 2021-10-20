@@ -15,7 +15,7 @@ namespace WebAPI.Features.Commands.UpdateProduct
             _serviceManager = serviceManager;
         }
 
-        public async Task<UpdateProductCommandResponse> Handle(UpdateProductCommandRequest request, CancellationToken cancellationToken)
+        public async Task<UpdateProductCommandResponse> Handle(UpdateProductCommandRequest request, CancellationToken token = default)
         {
             ProductDTO product = new ProductDTO
             {
@@ -26,7 +26,7 @@ namespace WebAPI.Features.Commands.UpdateProduct
                 Category = new CategoryDTO { Id = request.CategoryId }
             };
 
-            bool result = await _serviceManager.ProductService.UpdateAsync(product);
+            bool result = await _serviceManager.ProductService.UpdateAsync(product, token);
 
             return new UpdateProductCommandResponse
             {

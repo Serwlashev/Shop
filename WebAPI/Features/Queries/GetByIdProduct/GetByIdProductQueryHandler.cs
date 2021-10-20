@@ -16,9 +16,9 @@ namespace WebAPI.Features.Queries.GetByIdProduct
             _serviceManager = serviceManager;
             _mapper = mapper;
         }
-        public async Task<GetByIdProductQueryResponse> Handle(GetByIdProductQueryRequest request, CancellationToken cancellationToken)
+        public async Task<GetByIdProductQueryResponse> Handle(GetByIdProductQueryRequest request, CancellationToken token = default)
         {
-            var product = await _serviceManager.ProductService.GetAsync(request.Id);
+            var product = await _serviceManager.ProductService.GetAsync(request.Id, token);
 
             return _mapper.Map<GetByIdProductQueryResponse>(product);
         }

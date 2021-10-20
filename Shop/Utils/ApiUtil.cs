@@ -3,6 +3,7 @@ using Presentation.Shop.Utils.Interfaces;
 using System;
 using System.Net;
 using System.Net.Http;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Presentation.Shop.Utils
@@ -16,9 +17,9 @@ namespace Presentation.Shop.Utils
             _httpUtil = httpUtil;
         }
 
-        public async Task<bool> PostAsync<T>(string url, T entity)
+        public async Task<bool> PostAsync<T>(string url, T entity, CancellationToken token = default)
         {
-            var httpResponse = await _httpUtil.PostAsync(url, entity);
+            var httpResponse = await _httpUtil.PostAsync(url, entity, token);
 
             if(httpResponse.StatusCode == HttpStatusCode.OK)
             {
@@ -28,9 +29,9 @@ namespace Presentation.Shop.Utils
             return false;
         }
 
-        public async Task<bool> DeleteAsync(string url)
+        public async Task<bool> DeleteAsync(string url, CancellationToken token = default)
         {
-            var httpResponse = await _httpUtil.DeleteAsync(url);
+            var httpResponse = await _httpUtil.DeleteAsync(url, token);
 
             if (httpResponse.StatusCode == HttpStatusCode.OK)
             {
@@ -40,17 +41,17 @@ namespace Presentation.Shop.Utils
             return false;
         }
 
-        public async Task<T> GetAsync<T>(string url)
+        public async Task<T> GetAsync<T>(string url, CancellationToken token = default)
         {
             T responseModel = default;
 
             HttpResponseMessage httpResponse = default;
 
-            httpResponse = await _httpUtil.GetAsync(url);
+            httpResponse = await _httpUtil.GetAsync(url, token);
 
             if (httpResponse.StatusCode == HttpStatusCode.OK)
             {
-                string stringResponse = await httpResponse.Content.ReadAsStringAsync();
+                string stringResponse = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
 
                 responseModel = JsonConvert.DeserializeObject<T>(stringResponse);
             }
@@ -58,14 +59,14 @@ namespace Presentation.Shop.Utils
             return responseModel;
         }
 
-        public Task<string> LoginAsync(string url, string email, string password)
+        public Task<string> LoginAsync(string url, string email, string password, CancellationToken token = default)
         {
             throw new NotImplementedException();
         }
 
-        public async Task<bool> PutAsync<T>(string url, T entity)
+        public async Task<bool> PutAsync<T>(string url, T entity, CancellationToken token = default)
         {
-            var httpResponse = await _httpUtil.PutAsync(url, entity);
+            var httpResponse = await _httpUtil.PutAsync(url, entity, token);
 
             if (httpResponse.StatusCode == HttpStatusCode.OK)
             {

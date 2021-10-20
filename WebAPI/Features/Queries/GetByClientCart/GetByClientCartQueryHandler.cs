@@ -16,9 +16,10 @@ namespace WebAPI.Features.Queries.GetByClientCart
             _serviceManager = serviceManager;
             _mapper = mapper;
         }
-        public async Task<GetByClientCartQueryResponse> Handle(GetByClientCartQueryRequest request, CancellationToken cancellationToken)
+
+        public async Task<GetByClientCartQueryResponse> Handle(GetByClientCartQueryRequest request, CancellationToken token = default)
         {
-            var cart = await _serviceManager.CartService.GetByConditionAsync(cart => cart.UserId.Equals(request.UserId));
+            var cart = await _serviceManager.CartService.GetByConditionAsync(cart => cart.UserId.Equals(request.UserId), token);
 
             return _mapper.Map<GetByClientCartQueryResponse>(cart);
         }

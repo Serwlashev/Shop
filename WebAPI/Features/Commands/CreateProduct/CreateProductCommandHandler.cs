@@ -15,7 +15,7 @@ namespace WebAPI.Features.Commands.CreateProduct
             _serviceManager = serviceManager;
         }
 
-        public async Task<CreateProductCommandResponse> Handle(CreateProductCommandRequest request, CancellationToken cancellationToken)
+        public async Task<CreateProductCommandResponse> Handle(CreateProductCommandRequest request, CancellationToken token = default)
         {
             ProductDTO product = new ProductDTO
             {
@@ -25,7 +25,7 @@ namespace WebAPI.Features.Commands.CreateProduct
                 CategoryId = request.CategoryId
             };
 
-            bool result = await _serviceManager.ProductService.CreateAsync(product);
+            bool result = await _serviceManager.ProductService.CreateAsync(product, token);
 
             return new CreateProductCommandResponse
             {

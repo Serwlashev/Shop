@@ -4,9 +4,8 @@ using WebAPI.Features.Commands.UpdateCart;
 using WebAPI.Features.Queries.GetByClientCart;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.SignalR;
 using System.Threading.Tasks;
-using WebAPI.Hubs;
+using System.Threading;
 
 namespace WebAPI.Controllers
 {
@@ -15,28 +14,27 @@ namespace WebAPI.Controllers
     public class CartController : Controller
     {
         private readonly IMediator _mediator;
-        private readonly IHubContext<CartHub> _hubContext;
-        public CartController(IMediator mediator, IHubContext<CartHub> hubContext)
+
+        public CartController(IMediator mediator)
         {
             _mediator = mediator;
-            _hubContext = hubContext;
         }
 
         [HttpPost]
-        public async Task<AddToCartCommandResponse> CreateCart([FromBody] AddToCartCommandRequest request)
-            => await _mediator.Send(request);
+        public async Task<AddToCartCommandResponse> CreateCart([FromBody] AddToCartCommandRequest request, CancellationToken token)
+            => await _mediator.Send(request, token);
 
         [HttpGet("{id}")]
-        public async Task<GetByClientCartQueryResponse> GetByClientCart([FromHeader] GetByClientCartQueryRequest request)
-             => await _mediator.Send(request);
+        public async Task<GetByClientCartQueryResponse> GetByClientCart([FromHeader] GetByClientCartQueryRequest request, CancellationToken token)
+             => await _mediator.Send(request, token);
 
         [HttpPut]
-        public async Task<UpdateCartCommandResponse> UpdateCart([FromBody] UpdateCartCommandRequest request)
-             => await _mediator.Send(request);
+        public async Task<UpdateCartCommandResponse> UpdateCart([FromBody] UpdateCartCommandRequest request, CancellationToken token)
+             => await _mediator.Send(request, token);
 
         [HttpDelete]
         [Route("{id}")]
-        public async Task<DeleteCartCommandResponse> DeleteCart([FromHeader] DeleteCartCommandRequest request)
-             => await _mediator.Send(request);
+        public async Task<DeleteCartCommandResponse> DeleteCart([FromHeader] DeleteCartCommandRequest request, CancellationToken token)
+             => await _mediator.Send(request, token);
     }
 }

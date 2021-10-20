@@ -3,6 +3,7 @@ using Presentation.Shop.Utils.Interfaces;
 using System;
 using System.Net.Http;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Presentation.Shop.Utils
@@ -19,45 +20,45 @@ namespace Presentation.Shop.Utils
             };
         }
 
-        public async Task<HttpResponseMessage> DeleteAsync(string url)
+        public async Task<HttpResponseMessage> DeleteAsync(string url, CancellationToken token = default)
         {
             var requestMessage = new HttpRequestMessage(HttpMethod.Delete, url);
 
-            var responseMessage = await _client.SendAsync(requestMessage);
+            var responseMessage = await _client.SendAsync(requestMessage, token).ConfigureAwait(false);
 
             return responseMessage;
 
         }
 
-        public async Task<HttpResponseMessage> GetAsync(string url)
+        public async Task<HttpResponseMessage> GetAsync(string url, CancellationToken token = default)
         {
             var requestMessage = new HttpRequestMessage(HttpMethod.Get, url);
 
-            HttpResponseMessage httpResponse = await _client.SendAsync(requestMessage);
+            HttpResponseMessage httpResponse = await _client.SendAsync(requestMessage, token).ConfigureAwait(false);
 
             return httpResponse;
         }
 
-        public async Task<HttpResponseMessage> PostAsync<T>(string url, T data)
+        public async Task<HttpResponseMessage> PostAsync<T>(string url, T data, CancellationToken token = default)
         {
             var requestMessage = new HttpRequestMessage(HttpMethod.Post, url)
             {
                 Content = new StringContent(JsonConvert.SerializeObject(data), Encoding.UTF8)
             };
 
-            var responseMessage = await _client.SendAsync(requestMessage);
+            var responseMessage = await _client.SendAsync(requestMessage, token).ConfigureAwait(false);
 
             return responseMessage;
         }
 
-        public async Task<HttpResponseMessage> PutAsync<T>(string url, T data)
+        public async Task<HttpResponseMessage> PutAsync<T>(string url, T data, CancellationToken token = default)
         {
             var requestMessage = new HttpRequestMessage(HttpMethod.Put, url)
             {
                 Content = new StringContent(JsonConvert.SerializeObject(data), Encoding.UTF8)
             };
 
-            var responseMessage = await _client.SendAsync(requestMessage);
+            var responseMessage = await _client.SendAsync(requestMessage, token).ConfigureAwait(false);
 
             return responseMessage;
         }

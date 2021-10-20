@@ -14,9 +14,9 @@ namespace WebAPI.Features.Commands.Register
             _serviceManager = serviceManager;
         }
 
-        public async Task<RegisterCommandResponse> Handle(RegisterCommandRequest request, CancellationToken cancellationToken)
+        public async Task<RegisterCommandResponse> Handle(RegisterCommandRequest request, CancellationToken token = default)
         {
-            bool result = await _serviceManager.ProductService.RemoveAsync(request.Id);
+            bool result = await _serviceManager.ProductService.RemoveAsync(request.Id, token);
 
             return new RegisterCommandResponse
             {
